@@ -1,0 +1,1 @@
+lip_heavy_consonant = ["W", "SH", "CH", "R", "GR", "CR", "TR", "THR", "DH", "TH", "F", "V", "JH", "ZH", "KR", "DR", "SHR", "P", "M", "B"]
