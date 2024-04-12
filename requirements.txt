@@ -3,3 +3,7 @@ flask
 openai
 g2p_en
 soundfile
+librosa
+torchaudio
+flask_cors
+pandas
