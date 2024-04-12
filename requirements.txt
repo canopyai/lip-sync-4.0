@@ -1,0 +1,6 @@
+torch
+pprint
+flask
+openai
+g2p_en
+soundfile
