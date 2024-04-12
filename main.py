@@ -4,14 +4,14 @@ from audio_utils.resample_audio import resample_audio
 from phonemize.get_segments_torch import get_segments
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
-import pprint 
+
 from flask_cors import CORS
 import pandas as pd
 from flask import Flask, request
 
 
-pp = pprint.PrettyPrinter(indent=4)
-log  = pp.pprint
+
+
 
 app = Flask(__name__)
 CORS(app)
