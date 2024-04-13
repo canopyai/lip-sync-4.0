@@ -27,7 +27,7 @@ def main():
     resample_audio(raw_wav_file, resampled_wav_file)
 
     segments = get_segments(resampled_wav_file, sentence)
-    print(segments)
+
    
     segments = remove_mid_word_sils(segments)
 
@@ -59,6 +59,14 @@ def main():
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
+    last_dict = unpacked_animation_sequence[-1]
+
+    unpacked_animation_sequence.append({"duration": 100, "targets": last_dict['targets']})
+
+    neutral = ([0]*37)
+    neutral[0] = 1
+    unpacked_animation_sequence.append({"duration": 100, "targets": neutral})
+
 
 
     summed = sum([item['duration'] for item in unpacked_animation_sequence])
@@ -72,4 +80,4 @@ def main():
 # main(sentence)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080, host="0.0.0.0")
+    app.run(debug=True, port=8082, host="0.0.0.0")

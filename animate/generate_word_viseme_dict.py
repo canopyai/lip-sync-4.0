@@ -28,6 +28,7 @@ def generate_word_viseme_dict(word, duration):
     merge_graphemes = merge_phonemes_according_to_rules(split_graphemes)
 
     merge_graphemes  = remove_useless_phonemes(merge_graphemes)
+
     
 
 

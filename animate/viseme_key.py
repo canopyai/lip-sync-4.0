@@ -53,8 +53,8 @@ viseme_key = {
         "0": 16
     },
     "UW":{
-        "1":19, 
-        "0": 19
+        "1":33, 
+        "0": 33
     },
     "UH":{
         "1":20, 
@@ -66,7 +66,7 @@ viseme_key = {
     },
     "R":{
         "1":33,
-        "0": 33 #change this for weak r and remove 
+        "0": 11 #change this for weak r and remove 
     }, 
     "M":{
         "1":25, 

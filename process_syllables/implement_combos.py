@@ -1,4 +1,4 @@
-combos = [("G", "R"), ("T", "R"), ("F", "R"), ("TH", "R")]
+combos = [("G", "R"), ("T", "R"), ("TH", "R")]
 def implement_combos(phoneme_list):
 
     combined_phoneme_list = []
