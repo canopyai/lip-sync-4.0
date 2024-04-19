@@ -8,6 +8,7 @@ from animate.remove_mid_word_sils import remove_mid_word_sils
 from flask_cors import CORS
 import pandas as pd
 from flask import Flask, request
+import time
 
 
 
@@ -21,12 +22,15 @@ def main():
     url = request.url
     query_params = request.args.to_dict()
     sentence = query_params["text"]
+    preWav = time.time()
     b64string = get_wav_file(sentence)
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
     resample_audio(raw_wav_file, resampled_wav_file)
+    postWav = time.time()
 
-    segments = get_segments(resampled_wav_file, sentence)
+
+    segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
    
     segments = remove_mid_word_sils(segments)
@@ -50,8 +54,7 @@ def main():
         internal_word_duration = 0
         for gwv in generated_word_viseme_dict:
             internal_word_duration += gwv['duration']
-        
-        print(word, duration, internal_word_duration)
+
         
         animation_sequence_packed.append(generated_word_viseme_dict)
 
@@ -61,17 +64,17 @@ def main():
 
     last_dict = unpacked_animation_sequence[-1]
 
-    unpacked_animation_sequence.append({"duration": 100, "targets": last_dict['targets']})
+    # unpacked_animation_sequence.append({"duration": 100, "targets": last_dict['targets']})
 
-    neutral = ([0]*37)
-    neutral[0] = 1
-    unpacked_animation_sequence.append({"duration": 100, "targets": neutral})
+    # neutral = ([0]*37)
+    # neutral[0] = 1
+    # unpacked_animation_sequence.append({"duration": 100, "targets": neutral})
 
 
 
     summed = sum([item['duration'] for item in unpacked_animation_sequence])
     
-    return {"visemes": unpacked_animation_sequence, "b64string": b64string}
+    return {"visemes": unpacked_animation_sequence, "b64string": b64string, "segments_latency": segments_latency, "tts_latency":postWav - preWav}
 
 
 
