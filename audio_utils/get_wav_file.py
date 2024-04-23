@@ -1,25 +1,41 @@
-from openai import OpenAI
-from pathlib import Path
-import openai
+import requests
 import base64
+from audio_utils.resample_audio import resample_audio
+
+api_url = 'http://34.141.243.146:8080/api/v1/static'
+ping_url = 'http://34.141.243.146:8080/ping'
+
+text = 'Yes, I would absolutely "love" to go to the park, with you.'
+
+    # Parameters to send to the API
 
 
-client = OpenAI(
-)
+def get_wav_file(text):
 
+    data = {
+    'text': text,
+    'voice': "fast-list", 
+    'steps': 10, 
+    'alpha': 0.3,
+    'beta': 0.7,
+    'speed': 0.9, 
+    "embedding_scale":1
+}
 
-def get_wav_file(text_segment):
-    speech_file_path = Path(__file__).parent / "speech.wav"
-    response = openai.audio.speech.create(
-        model="tts-1",
-        voice="alloy",
-        input=text_segment,
-        response_format="wav"
-    )
-    response.stream_to_file(speech_file_path)
+    response = requests.post(api_url, data=data)
 
-    with open(speech_file_path, "rb") as file:
+    if response.status_code == 200:
+        with open(f'unsamp_speech.wav', 'wb') as f:
+            f.write(response.content)
+    else:
+        print("Error:", response.json()['error'])
+
+    resample_audio('unsamp_speech.wav', 'speech.wav')
+
+    with open('speech.wav', "rb") as file:
         wav_data = file.read()
         base64_wav = base64.b64encode(wav_data).decode("utf-8")
 
     return base64_wav
+
+
