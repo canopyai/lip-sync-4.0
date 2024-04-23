@@ -12,14 +12,14 @@ ping_url = 'http://34.141.243.146:8080/ping'
 def get_wav_file(text):
 
     data = {
-    'text': text,
-    'voice': "fast-list", 
-    'steps': 10, 
-    'alpha': 0.3,
-    'beta': 0.7,
-    'speed': 0.9, 
-    "embedding_scale":1
-}
+        'text': text,
+        'voice': "slow-emphatic", 
+        'steps': 13, 
+        'alpha': 0.3,
+        'beta': 0.7,
+        'speed': 0.8, 
+        "embedding_scale":1
+    }
 
     response = requests.post(api_url, data=data)
 
