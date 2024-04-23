@@ -5,7 +5,6 @@ from audio_utils.resample_audio import resample_audio
 api_url = 'http://34.141.243.146:8080/api/v1/static'
 ping_url = 'http://34.141.243.146:8080/ping'
 
-text = 'Yes, I would absolutely "love" to go to the park, with you.'
 
     # Parameters to send to the API
 
