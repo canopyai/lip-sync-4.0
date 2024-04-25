@@ -29,8 +29,11 @@ def main():
     b64string = get_wav_file(sentence)
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
+    mid_wav_time = time.time()
     resample_audio(raw_wav_file, resampled_wav_file)
     postWav = time.time()
+
+    print(f'Time to resample audio: {postWav - mid_wav_time}')
 
 
     sentence = sentence.replace(".", "").replace(",", "").replace("!", "").replace("?", "").upper()
