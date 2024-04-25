@@ -17,11 +17,10 @@ import time
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/generate_animation', methods=['GET'])
+@app.route('/generate_animation', methods=['POST'])
 def main():
-    url = request.url
-    query_params = request.args.to_dict()
-    sentence = query_params["text"]
+    data = request.get_json()
+    sentence = data["text"]
     preWav = time.time()
     b64string = get_wav_file(sentence)
     raw_wav_file = "audio_utils/speech.wav"
@@ -29,10 +28,8 @@ def main():
     resample_audio(raw_wav_file, resampled_wav_file)
     postWav = time.time()
 
-
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
-   
     segments = remove_mid_word_sils(segments)
 
     animation_sequence_packed = []
@@ -48,15 +45,18 @@ def main():
         duration = segment['end'] - last_end_time
         last_end_time = segment['end']
         
-
         duration_step_1_summer += duration
         generated_word_viseme_dict = generate_word_viseme_dict(word, duration)
         internal_word_duration = 0
         for gwv in generated_word_viseme_dict:
             internal_word_duration += gwv['duration']
 
-        
         animation_sequence_packed.append(generated_word_viseme_dict)
+
+    print("duration_step_1_summer", duration_step_1_summer)
+
+    unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
+
 
     print("duration_step_1_summer", duration_step_1_summer)
 
