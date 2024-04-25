@@ -2,6 +2,7 @@ import requests
 import base64
 from audio_utils.resample_audio import resample_audio
 import base64
+import time
 
 api_url = 'http://35.234.101.2:8080/api/v1/static'
 
@@ -22,6 +23,8 @@ def get_wav_file(text):
 
 
     response = requests.post(api_url, json=data)
+
+    startTime = time.time()
     audio_base64 = response.json()['audio_base64']
 
     # Decode the base64 string to audio data
@@ -30,6 +33,8 @@ def get_wav_file(text):
     # Write the audio data to a WAV file
     with open('speech.wav', 'wb') as file:
         file.write(audio_data)
+
+    print("time to unpack b64 + audio file", time.time() - startTime)
 
     return audio_base64
 
