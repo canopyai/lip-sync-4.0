@@ -9,7 +9,7 @@ def get_wav_file(text):
 
     data = {
         'text': text,
-        'voice': "slow-emphatic", 
+        'voice': "m-us-3", 
         'steps': 13, 
         'alpha': 0.3,
         'beta': 0.7,
