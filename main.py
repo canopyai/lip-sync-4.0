@@ -5,7 +5,7 @@ from phonemize.get_segments_torch import get_segments
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
 
-from flask_cors import CORS
+
 import pandas as pd
 from flask import Flask, request
 import time
@@ -29,7 +29,7 @@ def main():
     postWav = time.time()
 
 
-    
+    sentence = sentence.replace(".", "").replace(",", "").replace("!", "").replace("?", "").upper()
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
@@ -66,14 +66,6 @@ def main():
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
     last_dict = unpacked_animation_sequence[-1]
-
-    # unpacked_animation_sequence.append({"duration": 100, "targets": last_dict['targets']})
-
-    # neutral = ([0]*37)
-    # neutral[0] = 1
-    # unpacked_animation_sequence.append({"duration": 100, "targets": neutral})
-
-
 
     summed = sum([item['duration'] for item in unpacked_animation_sequence])
     
