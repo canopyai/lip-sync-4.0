@@ -17,6 +17,8 @@ def get_wav_file(text):
         "embedding_scale":1
     }
 
+    print("Getting audio file", text)
+
 
     response = requests.post(api_url, json=data)
     audio_base64 = response.json()['audio_base64']
