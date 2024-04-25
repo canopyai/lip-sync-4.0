@@ -5,9 +5,10 @@ import base64
 import time
 
 api_url = 'http://35.234.101.2:8080/api/v1/static'
+first_chunk_url  = 'http://34.91.134.10:8080/api/v1/static'
 
 
-def get_wav_file(text):
+def get_wav_file(text, isFirstChunk):
 
     data = {
         'text': text,
@@ -21,8 +22,14 @@ def get_wav_file(text):
 
     print("Getting audio file", text)
 
+    url_to_use = api_url
 
-    response = requests.post(api_url, json=data)
+    if isFirstChunk:
+        url_to_use = first_chunk_url
+        
+
+
+    response = requests.post(url_to_use, json=data)
 
     startTime = time.time()
     audio_base64 = response.json()['audio_base64']

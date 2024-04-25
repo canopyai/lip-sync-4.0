@@ -25,8 +25,9 @@ CORS(app)
 def main():
     data = request.get_json()
     sentence = data["text"]
+    isFirstChunk = data["isFirstChunk"]
     preWav = time.time()
-    b64string = get_wav_file(sentence)
+    b64string = get_wav_file(sentence, isFirstChunk)
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
     mid_wav_time = time.time()
