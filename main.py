@@ -4,31 +4,26 @@ from audio_utils.resample_audio import resample_audio
 from phonemize.get_segments_torch import get_segments
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
+from pydantic import BaseModel
+from fastapi import FastAPI
 
-from flask_cors import CORS
+class AnimationRequest(BaseModel):
+    text: str
+
 import pandas as pd
-from flask import Flask, request
+
 import time
+app = FastAPI()
 
-
-
-
-
-app = Flask(__name__)
-CORS(app)
-
-@app.route('/generate_animation', methods=['POST'])
-def main():
-    data = request.get_json()
-    sentence = data["text"]
+@app.post('/generate_animation')
+async def main(request: AnimationRequest):
+    sentence = request.text
     preWav = time.time()
     b64string = get_wav_file(sentence)
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
     resample_audio(raw_wav_file, resampled_wav_file)
     postWav = time.time()
-
-
     sentence = sentence.replace(".", "").replace(",", "").replace("!", "").replace("?", "").upper()
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
@@ -37,8 +32,6 @@ def main():
 
     animation_sequence_packed = []
     duration_step_1_summer = 0
-
-    # Initialize last_end_time with the start time of the first segment for the initial duration calculation
     if segments:
         last_end_time = segments[0]['start']
 
@@ -56,34 +49,11 @@ def main():
 
         animation_sequence_packed.append(generated_word_viseme_dict)
 
-    print("duration_step_1_summer", duration_step_1_summer)
-
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
 
-    print("duration_step_1_summer", duration_step_1_summer)
-
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
-
-    last_dict = unpacked_animation_sequence[-1]
-
-    # unpacked_animation_sequence.append({"duration": 100, "targets": last_dict['targets']})
-
-    # neutral = ([0]*37)
-    # neutral[0] = 1
-    # unpacked_animation_sequence.append({"duration": 100, "targets": neutral})
-
-
-
-    summed = sum([item['duration'] for item in unpacked_animation_sequence])
     
     return {"visemes": unpacked_animation_sequence, "b64string": b64string, "segments_latency": segments_latency, "tts_latency":postWav - preWav}
 
 
-
-# main()
-
-# main(sentence)
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8080, host="0.0.0.0")
