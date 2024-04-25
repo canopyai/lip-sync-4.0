@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 from animate.generate_word_viseme_dict import generate_word_viseme_dict
 from audio_utils.get_wav_file import get_wav_file
 from audio_utils.resample_audio import resample_audio
@@ -9,6 +12,7 @@ from flask_cors import CORS
 import pandas as pd
 from flask import Flask, request
 import time
+
 
 
 

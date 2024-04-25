@@ -6,4 +6,5 @@ soundfile
 librosa
 torchaudio
 flask_cors
+eventlet
 pandas
