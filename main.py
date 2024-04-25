@@ -5,7 +5,7 @@ from phonemize.get_segments_torch import get_segments
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
 
-
+from flask_cors import CORS
 import pandas as pd
 from flask import Flask, request
 import time
