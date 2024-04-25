@@ -28,6 +28,9 @@ def main():
     resample_audio(raw_wav_file, resampled_wav_file)
     postWav = time.time()
 
+
+    sentence = sentence.replace(".", "").replace(",", "").replace("!", "").replace("?", "").upper()
+
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
     segments = remove_mid_word_sils(segments)
