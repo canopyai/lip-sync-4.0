@@ -17,7 +17,9 @@ def get_wav_file(text, isFirstChunk):
         'alpha': 0.3,
         'beta': 0.7,
         'speed': 0.8, 
-        "embedding_scale":1
+        "embedding_scale":1, 
+        "speed":0.8
+
     }
 
     print("Getting audio file", text)
