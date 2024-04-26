@@ -37,7 +37,7 @@ def main():
     print(f'Time to resample audio: {postWav - mid_wav_time}')
 
 
-    sentence = sentence.replace(".", "").replace(",", "").replace("!", "").replace("?", "").upper()
+    sentence = sentence.replace(".", "").replace(",", "").replace("!", "").replace("?", "").replace("*","").upper()
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
