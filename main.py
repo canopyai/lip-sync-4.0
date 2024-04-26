@@ -12,6 +12,7 @@ from flask_cors import CORS
 import pandas as pd
 from flask import Flask, request
 import time
+import base64
 
 
 
@@ -30,8 +31,10 @@ def main():
     b64string = get_wav_file(sentence, isFirstChunk)
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
+    resampled_wav_file_22 = "audio_utils/22050_res.wav"
     mid_wav_time = time.time()
-    resample_audio(raw_wav_file, resampled_wav_file)
+    resample_audio(raw_wav_file, resampled_wav_file, 16000)
+    resample_audio(raw_wav_file, resampled_wav_file_22, 22050)
     postWav = time.time()
 
     print(f'Time to resample audio: {postWav - mid_wav_time}')
@@ -76,8 +79,19 @@ def main():
     last_dict = unpacked_animation_sequence[-1]
 
     summed = sum([item['duration'] for item in unpacked_animation_sequence])
+
+    resample_audio(resampled_wav_file_22, resampled_wav_file_22, 22050)
+
+    with open(resampled_wav_file_22, 'rb') as file:
+        wav_binary_data = file.read()
+
+    # Encode the binary data to a Base64 string
+    b64_encoded_data = base64.b64encode(wav_binary_data)
+
+    # Convert Base64 bytes to string for easier handling/display
+    b64_22 = b64_encoded_data.decode('utf-8')
     
-    return {"visemes": unpacked_animation_sequence, "b64string": b64string, "segments_latency": segments_latency, "tts_latency":postWav - preWav}
+    return {"visemes": unpacked_animation_sequence, "b64string": b64_22, "segments_latency": segments_latency, "tts_latency":postWav - preWav}
 
 
 
