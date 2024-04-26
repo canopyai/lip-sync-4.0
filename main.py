@@ -80,7 +80,6 @@ def main():
 
     summed = sum([item['duration'] for item in unpacked_animation_sequence])
 
-    resample_audio(resampled_wav_file_22, resampled_wav_file_22, 22050)
 
     with open(resampled_wav_file_22, 'rb') as file:
         wav_binary_data = file.read()
