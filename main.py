@@ -90,7 +90,7 @@ def main():
 
     # Convert Base64 bytes to string for easier handling/display
     b64_22 = b64_encoded_data.decode('utf-8')
-    
+     
     return {"visemes": unpacked_animation_sequence, "b64string": b64_22, "segments_latency": segments_latency, "tts_latency":postWav - preWav}
 
 
