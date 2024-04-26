@@ -40,7 +40,7 @@ def get_wav_file(text, isFirstChunk):
     audio_data = base64.b64decode(audio_base64)
 
     # Write the audio data to a WAV file
-    with open('speech.wav', 'wb') as file:
+    with open('audio_utils/speech.wav', 'wb') as file:
         file.write(audio_data)
 
     print("time to unpack b64 + audio file", time.time() - startTime)
