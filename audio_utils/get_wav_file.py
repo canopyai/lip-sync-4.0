@@ -4,7 +4,7 @@ from audio_utils.resample_audio import resample_audio
 import base64
 import time
 
-api_url = 'http://35.234.101.2:8080/api/v1/static'
+api_url = 'http://35.242.229.216:8080/api/v1/static'
 first_chunk_url  = 'http://34.91.134.10:8080/api/v1/static'
 
 
