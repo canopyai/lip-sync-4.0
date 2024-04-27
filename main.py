@@ -27,6 +27,7 @@ CORS(app)
 
 @app.route('/generate_animation', methods=['POST'])
 def main():
+    print("Request received") 
     data = request.get_json()
     sentence = data["text"]
     isFirstChunk = data["isFirstChunk"]
@@ -43,7 +44,7 @@ def main():
     print(f'Time to resample audio: {postWav - mid_wav_time}')
 
 
-    sentence = re.sub(r'[^A-Z]', '', sentence.upper())
+    sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
 
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
