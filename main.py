@@ -13,6 +13,9 @@ import pandas as pd
 from flask import Flask, request
 import time
 import base64
+import re
+
+
 
 
 
@@ -40,7 +43,8 @@ def main():
     print(f'Time to resample audio: {postWav - mid_wav_time}')
 
 
-    sentence = sentence.replace(".", "").replace(",", "").replace("!", "").replace("?", "").replace("*","").upper()
+    sentence = re.sub(r'[^A-Z]', '', sentence.upper())
+
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
