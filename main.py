@@ -7,6 +7,7 @@ from audio_utils.resample_audio import resample_audio
 from phonemize.get_segments_torch import get_segments
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
+from emotions.generate_emotion_sequences import generate_emotion_sequences
 
 from flask_cors import CORS
 import pandas as pd
@@ -20,7 +21,7 @@ import re
 
 
 
-
+emotion_vector=[0,0,0,0]
 
 app = Flask(__name__)
 CORS(app)
@@ -72,19 +73,17 @@ def main():
 
         animation_sequence_packed.append(generated_word_viseme_dict)
 
-    print("duration_step_1_summer", duration_step_1_summer)
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
 
     print("duration_step_1_summer", duration_step_1_summer)
 
+    emotion_vector = [1, 0, 0, 0]
+    
+    gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer, 0)
+
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
-
-    last_dict = unpacked_animation_sequence[-1]
-
-    summed = sum([item['duration'] for item in unpacked_animation_sequence])
-
 
     with open(resampled_wav_file_22, 'rb') as file:
         wav_binary_data = file.read()
@@ -95,7 +94,13 @@ def main():
     # Convert Base64 bytes to string for easier handling/display
     b64_22 = b64_encoded_data.decode('utf-8')
      
-    return {"visemes": unpacked_animation_sequence, "b64string": b64_22, "segments_latency": segments_latency, "tts_latency":postWav - preWav}
+    return {
+        "visemes": unpacked_animation_sequence, 
+        "b64string": b64_22, 
+        "segments_latency": segments_latency, 
+        "tts_latency":postWav - preWav, 
+        "emotion_sequences":gms
+        }
 
 
 
