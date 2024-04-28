@@ -32,6 +32,7 @@ def main():
     data = request.get_json()
     sentence = data["text"]
     isFirstChunk = data["isFirstChunk"]
+    emotion_vector = data["emotion_vector"]
     preWav = time.time()
     b64string = get_wav_file(sentence, isFirstChunk)
     raw_wav_file = "audio_utils/speech.wav"
@@ -75,11 +76,6 @@ def main():
 
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
-
-
-    print("duration_step_1_summer", duration_step_1_summer)
-
-    emotion_vector = [1, 0, 0, 0]
     
     gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
 
