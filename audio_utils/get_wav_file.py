@@ -12,7 +12,7 @@ def get_wav_file(text, isFirstChunk):
 
     data = {
         'text': text,
-        'voice': "m-us-3", 
+        'voice': "m-us-1", 
         'steps': 13, 
         'alpha': 0.3,
         'beta': 0.7,
