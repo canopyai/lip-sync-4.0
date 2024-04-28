@@ -22,7 +22,6 @@ def get_wav_file(text, isFirstChunk):
 
     }
 
-    print("Getting audio file", text)
 
     url_to_use = api_url
 
