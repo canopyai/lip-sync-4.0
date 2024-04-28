@@ -63,7 +63,7 @@ def transform_lists(list_of_lists):
         new_list = [lst[i] for lst in list_of_lists if len(lst) > i]
         
         # Attach this list to an object with a 'targets' key and a 'duration' property
-        obj = {'targets': new_list, 'duration': tick_duration}
+        obj = {'targets': new_list, 'duration': tick_duration*1000}
         
         # Append this object to the result list
         result.append(obj)
