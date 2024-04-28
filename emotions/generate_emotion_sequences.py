@@ -50,6 +50,26 @@ def generate_emotion_sequence(duration, smoothing):
 
     return smoothed_gaussian_array
 
+def transform_lists(list_of_lists):
+    # Calculate the number of elements in the smallest list to ensure uniformity
+    min_length = min(len(lst) for lst in list_of_lists)
+    
+    # Prepare the result list
+    result = []
+    
+    # Loop through each index up to the minimum length
+    for i in range(min_length):
+        # Extract the ith element from each list and create a new list of these elements
+        new_list = [lst[i] for lst in list_of_lists if len(lst) > i]
+        
+        # Attach this list to an object with a 'targets' key and a 'duration' property
+        obj = {'targets': new_list, 'duration': tick_duration}
+        
+        # Append this object to the result list
+        result.append(obj)
+    
+    return result
+
 def generate_emotion_sequences (emotion_vector, duration, smoothing=0):
     # Initialize the list to store the Gaussian shape arrays
     gaussian_shape_arrays = []
@@ -62,7 +82,8 @@ def generate_emotion_sequences (emotion_vector, duration, smoothing=0):
         # Append the Gaussian shape array to the list
         gaussian_shape_arrays.append(gaussian_shape.tolist())
     
-    return gaussian_shape_arrays
+    return transform_lists(gaussian_shape_arrays)
+
 
 # # Example usage:
 emotion_vector = [1, 0, 0, 0]  # Example vector, not used in this specific implementation
