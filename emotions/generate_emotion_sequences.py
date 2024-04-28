@@ -65,7 +65,7 @@ def generate_emotion_sequences (emotion_vector, duration, smoothing=0):
     return gaussian_shape_arrays
 
 # # Example usage:
-# emotion_vector = [1, 0, 0, 0]  # Example vector, not used in this specific implementation
-# duration = 5  # Duration of the emotional expression or event
-# gaussian_shape = generate_emotion_sequences(emotion_vector,duration, 1)
-# print("Gaussian Shape Array:", gaussian_shape)
+emotion_vector = [1, 0, 0, 0]  # Example vector, not used in this specific implementation
+duration = 5  # Duration of the emotional expression or event
+gaussian_shape = generate_emotion_sequences(emotion_vector,duration, 1)
+print("Gaussian Shape Array:", gaussian_shape)

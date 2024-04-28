@@ -81,7 +81,7 @@ def main():
 
     emotion_vector = [1, 0, 0, 0]
     
-    gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer, 0)
+    gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
