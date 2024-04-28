@@ -1,15 +1,16 @@
 import numpy as np
 
 tick_duration = 0.25
+shape_std_dev_scalar = 0.5
 def create_gaussian_shape_array(sampled_point, shape_std_dev, duration, tick_duration):
     num_samples = int(duration / tick_duration)  # Calculate the number of points to generate
     gaussian_array = np.zeros(num_samples)  # Initialize the array with zeros
-
+    
     # Populate the array with values from a Gaussian function
     for i in range(num_samples):
         x = i * tick_duration
         # Gaussian formula: exp(-(x - b)^2 / (2 * c^2)), b is mean (sampled_point here), c is std_dev
-        gaussian_array[i] = np.exp(-(x - sampled_point)**2 / (2 * shape_std_dev**2))
+        gaussian_array[i] = np.exp(-(x - sampled_point)**2 / (2*shape_std_dev_scalar * shape_std_dev**2))
     
     return gaussian_array
 
@@ -42,6 +43,7 @@ def generate_emotion_sequence(duration, smoothing):
 
     sampled_point = np.random.normal(loc=mean, scale=sampling_std_dev)
     sampled_point = max(0, min(sampled_point, duration))
+    sampled_point = sampled_point + (duration- sampled_point) * np.random.uniform(0, 1)
     gaussian_shape_array = create_gaussian_shape_array(sampled_point, 2, duration, tick_duration)
     smoothing_array = generate_smoothing_array(smoothing, duration, tick_duration)
 
