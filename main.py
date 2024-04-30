@@ -21,7 +21,7 @@ import re
 
 
 
-emotion_vector=[0,0,0,0]
+# emotion_vector=[0,0,0,0]
 
 app = Flask(__name__)
 CORS(app)
@@ -32,7 +32,7 @@ def main():
     data = request.get_json()
     sentence = data["text"]
     isFirstChunk = data["isFirstChunk"]
-    emotion_vector = data["emotion_vector"]
+    # emotion_vector = data["emotion_vector"]
     preWav = time.time()
     b64string = get_wav_file(sentence, isFirstChunk)
     raw_wav_file = "audio_utils/speech.wav"
@@ -77,7 +77,7 @@ def main():
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
     
-    gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
+    # gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
@@ -95,7 +95,7 @@ def main():
         "b64string": b64_22, 
         "segments_latency": segments_latency, 
         "tts_latency":postWav - preWav, 
-        "emotion_sequences":gms
+        # "emotion_sequences":gms
         }
 
 
