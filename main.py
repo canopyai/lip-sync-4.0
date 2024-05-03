@@ -62,7 +62,7 @@ def main():
     print("Segments after removing mid word sils: ", segments)
 
     #make R => RR
-    segments - implementRR(segments)
+    segments = implementRR(segments)
     animation_sequence_packed = []
     duration_step_1_summer = 0
 
