@@ -62,8 +62,7 @@ def main():
     animation_sequence_packed = []
     duration_step_1_summer = 0
 
-    if segments:
-        last_end_time = segments[0]['start']
+
 
     for segment in segments:
         word = segment['word']

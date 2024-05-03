@@ -10,7 +10,6 @@ from animate.remove_useless_phonemes import remove_useless_phonemes
 from animate.remove_tiny_durations import remove_tiny_durations
 
 def generate_word_viseme_dict(word, duration):
-    #step 1 graphemise
 
     word_vector_dicts = []
 
@@ -51,28 +50,8 @@ def generate_word_viseme_dict(word, duration):
         syllable_animation_phoneme_list = generate_animation_per_syllable(phoneme_list_per_syllable, syllable_duration)
         word_vector_dicts.append(syllable_animation_phoneme_list)
 
-    
-
-
-    # print(word_vector_dicts[0]["base"], word_vector_dicts[0]["duration"])
-    # pre_op_acc = 0
-    # for j in word_vector_dicts:
-    #     for i in j:
-    #         print(i["duration"], i["base"])
-    #         pre_op_acc += i["duration"]
 
     word_vector_dicts = remove_tiny_durations(word_vector_dicts)
-
-    # print(word_vector_dicts)
-    
-    # post_op_acc = 0
-
-    # for k in word_vector_dicts:
-    #     for l in k:
-    #         print(l["base"], l["duration"])
-    #         post_op_acc += l["duration"]
-    
-    # print("durations", pre_op_acc, post_op_acc)
 
 
     
@@ -83,22 +62,3 @@ def generate_word_viseme_dict(word, duration):
 
 
     
-
-
-
-    
-
-        
-
-    #step 3 generate visemes from syllable
-
-    #rules around phonemes
-    
-    #before processing remove modifiers
-
-    #r1: any vowel after a lip consonant vowel has stress 0
-    #r2: modifiers only get applied to vowels concurrently with vowels
-    #r3: Add weightings to timings according to required deviation of mouth shape
-
-
-    return merge_graphemes
