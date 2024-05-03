@@ -89,6 +89,12 @@ def main():
         animation_sequence_packed.append(generated_word_viseme_dict)
 
 
+        g_structured_phoneme_vector = [0]*37
+        g_structured_phoneme_vector[0] = 1
+        g_dict =  [{"duration": 200, "targets": g_structured_phoneme_vector}]
+        animation_sequence_packed.append(g_dict)
+
+
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
     print("duration_step_1_summer: ", duration_step_1_summer)
