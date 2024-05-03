@@ -65,6 +65,14 @@ def main():
     if segments:
         last_end_time = segments[0]['start']
 
+        f_dur = last_end_time
+        f_structured_phoneme_vector = [0]*37
+        f_structured_phoneme_vector[0] = 1
+        f_dict =  [{"duration": duration, "targets": f_structured_phoneme_vector}]
+        animation_sequence_packed.append(f_dict)
+
+
+
     for segment in segments:
         word = segment['word']
         
