@@ -63,6 +63,8 @@ def main():
 
     #make R => RR
     segments = implementRR(segments)
+
+    print("Segments after implementing RR: ", segments) 
     animation_sequence_packed = []
     duration_step_1_summer = 0
 
