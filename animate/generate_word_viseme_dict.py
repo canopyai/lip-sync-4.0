@@ -9,7 +9,7 @@ from animate.remove_useless_phonemes import remove_useless_phonemes
 
 from animate.remove_tiny_durations import remove_tiny_durations
 
-def generate_word_viseme_dict(word, duration):
+def generate_word_viseme_dict(word, duration, graphemes):
 
     word_vector_dicts = []
 
@@ -20,7 +20,7 @@ def generate_word_viseme_dict(word, duration):
         structured_phoneme_vector[0] = 1
         return [{"duration": duration, "targets": structured_phoneme_vector}]
 
-    graphemes = convert_word_to_graphemes(word)
+    # graphemes = convert_word_to_graphemes(word)
 
     split_graphemes = split_phonemes(graphemes)
 
