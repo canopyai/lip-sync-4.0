@@ -38,6 +38,7 @@ def main():
     sentence = data["text"]
     isFirstChunk = data["isFirstChunk"]
     emotion_vector = data["emotion_vector"]
+    add_post_padding = data["add_post_padding"]
     preWav = time.time()
     b64string = get_wav_file(sentence, isFirstChunk)
     raw_wav_file = "audio_utils/speech.wav"
@@ -94,10 +95,11 @@ def main():
         animation_sequence_packed.append(generated_word_viseme_dict)
 
 
-    g_structured_phoneme_vector = [0]*37
-    g_structured_phoneme_vector[0] = 1
-    g_dict =  [{"duration": 200, "targets": g_structured_phoneme_vector}]
-    animation_sequence_packed.append(g_dict)
+    if add_post_padding:
+        g_structured_phoneme_vector = [0]*37
+        g_structured_phoneme_vector[0] = 1
+        g_dict =  [{"duration": 200, "targets": g_structured_phoneme_vector}]
+        animation_sequence_packed.append(g_dict)
 
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
