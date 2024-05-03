@@ -7,6 +7,11 @@ def deduplicate_visemes(data):
         if data[i]['targets'] == data[i + 1]['targets']:
             indices_to_modify.append(i)
 
+            print(data[i]['targets'])
+            print(data[i + 1]['targets'])
+            print("***")
+            
+
     # Apply modifications at the identified indices
     for i in indices_to_modify:
         data[i]['targets'] = [x * 0.8 for x in data[i]['targets']]
