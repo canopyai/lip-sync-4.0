@@ -103,6 +103,8 @@ def main():
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
+    print(unpacked_animation_sequence)
+
     with open(resampled_wav_file_22, 'rb') as file:
         wav_binary_data = file.read()
 
