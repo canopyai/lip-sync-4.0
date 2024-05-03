@@ -10,6 +10,7 @@ from animate.remove_mid_word_sils import remove_mid_word_sils
 from emotions.generate_emotion_sequences import generate_emotion_sequences
 from get_duration import get_wav_duration
 from calculate_total_duration import calculate_total_duration
+from deduplicate_visemes import deduplicate_visemes
 
 from flask_cors import CORS
 import pandas as pd
@@ -102,6 +103,8 @@ def main():
     gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
+
+    unpacked_animation_sequence = deduplicate_visemes(unpacked_animation_sequence)
 
     print(unpacked_animation_sequence)
 
