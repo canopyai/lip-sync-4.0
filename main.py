@@ -73,6 +73,7 @@ def main():
         
         duration_step_1_summer += duration
         generated_word_viseme_dict = generate_word_viseme_dict(word, duration)
+        print("Generated word viseme dict: ", generated_word_viseme_dict)
         internal_word_duration = 0
         for gwv in generated_word_viseme_dict:
             internal_word_duration += gwv['duration']
