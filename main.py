@@ -43,7 +43,6 @@ def main():
     resample_audio(raw_wav_file, resampled_wav_file_22, 22050)
     postWav = time.time()
 
-    print(f'Time to resample audio: {postWav - mid_wav_time}')
 
 
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
@@ -56,7 +55,6 @@ def main():
     animation_sequence_packed = []
     duration_step_1_summer = 0
 
-    # Initialize last_end_time with the start time of the first segment for the initial duration calculation
     if segments:
         last_end_time = segments[0]['start']
 

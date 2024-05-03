@@ -8,7 +8,6 @@ def remove_mid_word_sils(phoneme_dicts):
 
     # Clean phoneme_lists
     for phoneme_dict in phoneme_dicts:
-        print(phoneme_dict)
         phoneme_dict['graphemes'] = [phoneme for phoneme in phoneme_dict['graphemes'] if is_valid_phoneme(phoneme) and phoneme.strip() not in special_characters]
 
     # Find indexes of entries where the word is '<sil>'

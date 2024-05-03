@@ -78,7 +78,6 @@ def generate_emotion_sequences (emotion_vector, duration, smoothing=0):
     
     # Generate the Gaussian shape array for each emotion in the emotion vector
     for i, emotion in enumerate(emotion_vector):
-        print(emotion)
         # Generate the Gaussian shape array for the emotion
         gaussian_shape = generate_emotion_sequence(duration, smoothing) * emotion
         # Append the Gaussian shape array to the list
@@ -91,4 +90,3 @@ def generate_emotion_sequences (emotion_vector, duration, smoothing=0):
 emotion_vector = [1, 0, 0, 0]  # Example vector, not used in this specific implementation
 duration = 5  # Duration of the emotional expression or event
 gaussian_shape = generate_emotion_sequences(emotion_vector,duration, 1)
-print("Gaussian Shape Array:", gaussian_shape)

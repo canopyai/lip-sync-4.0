@@ -23,4 +23,3 @@ def transcribe_with_timestamps(audio_path):
 if __name__ == '__main__':
     audio_path = sys.argv[1]
     segments = transcribe_with_timestamps(audio_path)
-    print(json.dumps(segments))
