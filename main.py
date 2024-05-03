@@ -8,6 +8,7 @@ from phonemize.get_segments_torch import get_segments
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
 from emotions.generate_emotion_sequences import generate_emotion_sequences
+from get_duration import get_wav_duration
 
 from flask_cors import CORS
 import pandas as pd
@@ -15,6 +16,7 @@ from flask import Flask, request
 import time
 import base64
 import re
+import os
 
 
 
@@ -38,9 +40,11 @@ def main():
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
     resampled_wav_file_22 = "audio_utils/22050_res.wav"
-    mid_wav_time = time.time()
     resample_audio(raw_wav_file, resampled_wav_file, 16000)
     resample_audio(raw_wav_file, resampled_wav_file_22, 22050)
+    duration = get_wav_duration(resampled_wav_file)
+    print("Duration: ", duration)
+
     postWav = time.time()
 
 
@@ -50,7 +54,11 @@ def main():
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
+    print("Segments: ", segments)
+
     segments = remove_mid_word_sils(segments)
+
+    print("Segments after removing mid word sils: ", segments)
 
     animation_sequence_packed = []
     duration_step_1_summer = 0
