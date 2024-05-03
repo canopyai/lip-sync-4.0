@@ -1,5 +1,4 @@
 def deduplicate_visemes(data):
-    print("duplicate_data: ", data)
     indices_to_modify = []
 
     # Check for equality between elements 0 through 32 inclusive

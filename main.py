@@ -11,6 +11,7 @@ from emotions.generate_emotion_sequences import generate_emotion_sequences
 from get_duration import get_wav_duration
 from calculate_total_duration import calculate_total_duration
 from deduplicate_visemes import deduplicate_visemes
+from implementRR import implementRR
 
 from flask_cors import CORS
 import pandas as pd
@@ -60,6 +61,8 @@ def main():
 
     print("Segments after removing mid word sils: ", segments)
 
+    #make R => RR
+    segments - implementRR(segments)
     animation_sequence_packed = []
     duration_step_1_summer = 0
 
@@ -97,8 +100,6 @@ def main():
 
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
-
-    print("duration_step_1_summer: ", duration_step_1_summer)
     
     gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
 
