@@ -54,8 +54,6 @@ def main():
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
-    print("Segments: ", segments)
-
     segments = remove_mid_word_sils(segments)
 
     print("Segments after removing mid word sils: ", segments)
@@ -95,6 +93,8 @@ def main():
 
     # Convert Base64 bytes to string for easier handling/display
     b64_22 = b64_encoded_data.decode('utf-8')
+
+    print(unpacked_animation_sequence)
      
     return {
         "visemes": unpacked_animation_sequence, 
