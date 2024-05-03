@@ -59,8 +59,6 @@ def main():
 
     segments = remove_mid_word_sils(segments)
 
-    print("Segments after removing mid word sils: ", segments)
-
     #make R => RR
     segments = implementRR(segments)
 
@@ -86,6 +84,7 @@ def main():
         last_end_time = segment['end']
         
         duration_step_1_summer += duration
+        print("input word: ", word)
         generated_word_viseme_dict = generate_word_viseme_dict(word, duration)
         print("Generated word viseme dict: ", generated_word_viseme_dict)
         internal_word_duration = 0
