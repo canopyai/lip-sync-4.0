@@ -9,6 +9,7 @@ from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
 from emotions.generate_emotion_sequences import generate_emotion_sequences
 from get_duration import get_wav_duration
+from calculate_total_duration import calculate_total_duration
 
 from flask_cors import CORS
 import pandas as pd
@@ -94,7 +95,8 @@ def main():
     # Convert Base64 bytes to string for easier handling/display
     b64_22 = b64_encoded_data.decode('utf-8')
 
-    print(unpacked_animation_sequence)
+    tot = calculate_total_duration(unpacked_animation_sequence)
+    print("Total duration: ", tot)
      
     return {
         "visemes": unpacked_animation_sequence, 
