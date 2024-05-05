@@ -74,7 +74,7 @@ def main():
         f_structured_phoneme_vector = [0]*37
         f_structured_phoneme_vector[0] = 1
         f_dict =  [{"duration": f_dur, "targets": f_structured_phoneme_vector}]
-        animation_sequence_packed.append(f_dict)
+        # animation_sequence_packed.append(f_dict)
 
 
 
