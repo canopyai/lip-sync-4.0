@@ -52,25 +52,14 @@ def main():
     print("Duration: ", duration)
 
     postWav = time.time()
-
-
-
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
-
-
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
-    print("Segments: ", segments)
+
+    segments = implementRR(segments)
     segments = process_handle_pause(segments, original_sentence)
+    segments = remove_mid_word_sils(segments)
 
-    print("Segments after processing pauses: ", segments)
-
-    # segments = remove_mid_word_sils(segments)
-
-    #make R => RR
-    segments = implementRR(segments, )
-
-    print("Segments after implementing RR: ", segments) 
     animation_sequence_packed = []
     duration_step_1_summer = 0
 
@@ -83,8 +72,6 @@ def main():
         f_structured_phoneme_vector[0] = 1
         f_dict =  [{"duration": f_dur, "targets": f_structured_phoneme_vector}]
 
-
-
     for segment in segments:
         word = segment['word']
         
@@ -92,9 +79,9 @@ def main():
         last_end_time = segment['end']
         
         duration_step_1_summer += duration
-        print("input word: ", word, segment["graphemes"][0])
+
         generated_word_viseme_dict = generate_word_viseme_dict(word, duration, segment["graphemes"])
-        print("Generated word viseme dict: ", generated_word_viseme_dict)
+
         internal_word_duration = 0
         for gwv in generated_word_viseme_dict:
             internal_word_duration += gwv['duration']

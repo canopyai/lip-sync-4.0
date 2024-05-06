@@ -20,8 +20,6 @@ def generate_word_viseme_dict(word, duration, graphemes):
         structured_phoneme_vector[0] = 1
         return [{"duration": duration, "targets": structured_phoneme_vector}]
 
-    # graphemes = convert_word_to_graphemes(word)
-
     split_graphemes = split_phonemes(graphemes)
 
     merge_graphemes = merge_phonemes_according_to_rules(split_graphemes)
@@ -51,6 +49,8 @@ def generate_word_viseme_dict(word, duration, graphemes):
         word_vector_dicts.append(syllable_animation_phoneme_list)
 
 
+
+    print("word_vector_dicts", word_vector_dicts)
     word_vector_dicts = remove_tiny_durations(word_vector_dicts)
 
 
