@@ -57,18 +57,18 @@ def handle_pauses(shapes, ided_tuples):
         if first_shape and second_shape:
             duration_diff = second_shape['start'] - first_shape['end']
 
-        if(duration_diff > 150):
+        if(duration_diff > 99):
             neu_viseme = {
-                'word': '<sil>',
+                'word': 'DEF',
                 'start': first_shape['end'],
-                'end': first_shape['end']+50,
-                'graphemes': ['<sil>'],
+                'end': first_shape['end']+30,
+                'graphemes': ['DEF'],
             }
             neu_viseme_2 = {
-                'word': '<sil>',
-                'start': first_shape['end']+50,
-                'end': first_shape['end']+150,
-                'graphemes': ['<sil>'],
+                'word': 'DEF',
+                'start': first_shape['end']+30,
+                'end': second_shape['start'],
+                'graphemes': ['DEF'],
             }
             insert_index = find_insert_index(updated_shapes, neu_viseme)
             updated_shapes.insert(insert_index, neu_viseme_2)
