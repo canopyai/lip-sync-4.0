@@ -76,7 +76,7 @@ def handle_pauses(shapes, ided_tuples):
                     'word': 'NEU',
                     'start': new_shape['end'],
                     'end': second_shape['start'],
-                    'graphemes': ['NEU'],
+                    'graphemes': ['<sil>'],
                     'strength': 0.8
                 }
                 insert_index = find_insert_index(updated_shapes, neu_viseme)
