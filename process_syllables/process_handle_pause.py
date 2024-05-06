@@ -68,7 +68,7 @@ def handle_pauses(shapes, ided_tuples):
             }
 
             insert_index = find_insert_index(updated_shapes, new_shape)
-            updated_shapes.insert(insert_index, new_shape)
+            # updated_shapes.insert(insert_index, new_shape)
             
             if duration_diff > 150:
                 # Create NEU viseme for the remaining duration
