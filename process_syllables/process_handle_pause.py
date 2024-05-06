@@ -57,8 +57,24 @@ def handle_pauses(shapes, ided_tuples):
         if first_shape and second_shape:
             duration_diff = second_shape['start'] - first_shape['end']
 
-            print("duration_diff",min(duration_diff, 120))
-            
+        if(duration_diff > 150):
+            neu_viseme = {
+                'word': '<sil>',
+                'start': new_shape['end'],
+                'end': new_shape['end']+50,
+                'graphemes': ['<sil>'],
+            }
+            neu_viseme_2 = {
+                'word': '<sil>',
+                'start': new_shape['end']+50,
+                'end': new_shape['end']+150,
+                'graphemes': ['<sil>'],
+            }
+            insert_index = find_insert_index(updated_shapes, neu_viseme)
+            updated_shapes.insert(insert_index, neu_viseme_2)
+            updated_shapes.insert(insert_index, neu_viseme)
+
+        else:
             new_shape = {
                 'word': first_word,
                 'start': first_shape['end'] + 30,
@@ -68,19 +84,9 @@ def handle_pauses(shapes, ided_tuples):
             }
 
             insert_index = find_insert_index(updated_shapes, new_shape)
-            # updated_shapes.insert(insert_index, new_shape)
+            updated_shapes.insert(insert_index, new_shape)
             
-            if duration_diff > 150:
-                # Create NEU viseme for the remaining duration
-                neu_viseme = {
-                    'word': '<sil>',
-                    'start': new_shape['end'],
-                    'end': second_shape['start'],
-                    'graphemes': ['<sil>'],
-                    'strength': 0.8
-                }
-                insert_index = find_insert_index(updated_shapes, neu_viseme)
-                updated_shapes.insert(insert_index, neu_viseme)
+     
 
     return updated_shapes
 
