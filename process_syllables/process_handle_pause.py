@@ -74,18 +74,7 @@ def handle_pauses(shapes, ided_tuples):
             updated_shapes.insert(insert_index, neu_viseme_2)
             updated_shapes.insert(insert_index, neu_viseme)
 
-        else:
-            new_shape = {
-                'word': first_word,
-                'start': first_shape['end'] + 30,
-                'end': first_shape['end'] + 30 + min(150, duration_diff),
-                'graphemes': first_shape['graphemes'],
-                'strength': 0.8 * (1 - (min(duration_diff, 120) / 120))
-            }
 
-            insert_index = find_insert_index(updated_shapes, new_shape)
-            updated_shapes.insert(insert_index, new_shape)
-            
      
 
     return updated_shapes
