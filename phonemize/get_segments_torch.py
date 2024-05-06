@@ -22,7 +22,6 @@ def get_segments(speech_file, text):
         emissions, _ = model(waveform.to(device))
         emissions = torch.log_softmax(emissions, dim=-1)
     emission = emissions[0].cpu().detach()
-    # transcript = "|I|HAD|THAT|CURIOSITY|BESIDE|ME|AT|THIS|MOMENT|"
     dictionary = {c: i for i, c in enumerate(labels)}
     tokens = [dictionary[c] for c in transcript]
     trellis = get_trellis(emission, tokens)
