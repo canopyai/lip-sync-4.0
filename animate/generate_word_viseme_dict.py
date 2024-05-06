@@ -9,18 +9,21 @@ from animate.remove_useless_phonemes import remove_useless_phonemes
 
 from animate.remove_tiny_durations import remove_tiny_durations
 
-def generate_word_viseme_dict(word, duration, graphemes):
+def generate_word_viseme_dict(word, duration, graphemes, previous_targets=None):
 
     print("Generating word viseme dict for word: ", word, " with duration: ", duration, " and graphemes: ", graphemes)
 
     word_vector_dicts = []
 
-    structure_phonemes = ["<s>", "</s>", "<sil>", "DEF"]
+    structure_phonemes = ["<s>", "</s>", "<sil>"]
 
     if word in structure_phonemes:
         structured_phoneme_vector = [0]*37
         structured_phoneme_vector[0] = 1
         return [{"duration": duration, "targets": structured_phoneme_vector, word: word}]
+    
+    if word == "DEF":
+        return [{"duration": duration, "targets": previous_targets, word: "DUP"}]
 
     split_graphemes = split_phonemes(graphemes)
 

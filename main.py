@@ -74,6 +74,7 @@ def main():
         f_structured_phoneme_vector[0] = 1
         f_dict =  [{"duration": f_dur, "targets": f_structured_phoneme_vector}]
 
+    previous_targets = None
     for segment in segments:
         word = segment['word']
         
@@ -82,8 +83,9 @@ def main():
         
         duration_step_1_summer += duration
 
-        generated_word_viseme_dict = generate_word_viseme_dict(word, duration, segment["graphemes"])
-
+        generated_word_viseme_dict = generate_word_viseme_dict(word, duration, segment["graphemes"], previous_targets)
+        previous_targets = generated_word_viseme_dict["targets"]
+        
         internal_word_duration = 0
         for gwv in generated_word_viseme_dict:
             internal_word_duration += gwv['duration']
