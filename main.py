@@ -17,7 +17,7 @@ from head_movements.calculate_head_movements import calculate_head_movements
 
 from flask_cors import CORS
 import pandas as pd
-from flask import Flask, request
+from flask import Flask, request 
 import time
 import base64
 import re
