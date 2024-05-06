@@ -50,7 +50,7 @@ def generate_word_viseme_dict(word, duration, graphemes):
 
 
 
-    print("word_vector_dicts", word_vector_dicts)
+    print("word_vector_dicts", word, word_vector_dicts)
     word_vector_dicts = remove_tiny_durations(word_vector_dicts)
 
 
