@@ -55,7 +55,7 @@ def generate_word_viseme_dict(word, duration, graphemes, previous_targets=None):
         word_vector_dicts.append(syllable_animation_phoneme_list)
 
     #prune syllables
-    print("pruning",word_vector_dicts)
+    # print("pruning",word_vector_dicts)
     word_vector_dicts = remove_tiny_durations(word_vector_dicts)
 
 

@@ -84,7 +84,8 @@ def main():
         duration_step_1_summer += duration
 
         generated_word_viseme_dict = generate_word_viseme_dict(word, duration, segment["graphemes"], previous_targets)
-        previous_targets = generated_word_viseme_dict[-1]["targets"]
+        if(len(generated_word_viseme_dict) > 0):
+            previous_targets = generated_word_viseme_dict[-1]["targets"]
 
         internal_word_duration = 0
         for gwv in generated_word_viseme_dict:
