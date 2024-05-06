@@ -13,6 +13,7 @@ from calculate_total_duration import calculate_total_duration
 from deduplicate_visemes import deduplicate_visemes
 from implementRR import implementRR
 from process_syllables.process_handle_pause import process_handle_pause
+from head_movements.calculate_head_movements import calculate_head_movements
 
 from flask_cors import CORS
 import pandas as pd
@@ -55,7 +56,7 @@ def main():
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
-    print(segments)
+    calculate_head_movements(segments)
     segments = remove_mid_word_sils(segments)
 
     segments = implementRR(segments)
