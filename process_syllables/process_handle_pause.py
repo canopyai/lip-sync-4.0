@@ -60,14 +60,14 @@ def handle_pauses(shapes, ided_tuples):
         if(duration_diff > 150):
             neu_viseme = {
                 'word': '<sil>',
-                'start': new_shape['end'],
-                'end': new_shape['end']+50,
+                'start': first_shape['end'],
+                'end': first_shape['end']+50,
                 'graphemes': ['<sil>'],
             }
             neu_viseme_2 = {
                 'word': '<sil>',
-                'start': new_shape['end']+50,
-                'end': new_shape['end']+150,
+                'start': first_shape['end']+50,
+                'end': first_shape['end']+150,
                 'graphemes': ['<sil>'],
             }
             insert_index = find_insert_index(updated_shapes, neu_viseme)
