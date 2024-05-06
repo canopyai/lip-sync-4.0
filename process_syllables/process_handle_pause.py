@@ -6,13 +6,14 @@ import bisect
 
 def find_pair_punctuation(text):
     all_pairs = []
-    text = text.replace("'", "")
+    text = text.replace("'", "")  # Remove all apostrophes
     punctuations = [',', '.', '!', '?', ':', ';', '"']
-    texts = text.split(" ")
-    for i,text in enumerate(texts):
-      if ((text[len(text)-1]) in punctuations) and i < (len(texts) -1):
-        all_pairs.append((remove_non_alphanumeric(text).upper(), remove_non_alphanumeric(texts[i+1]).upper()))
+    texts = text.split()  # This also handles multiple spaces correctly
+    for i, text in enumerate(texts):
+        if text and text[-1] in punctuations and i < len(texts) - 1:  # Check if text is not empty and last char is a punctuation
+            all_pairs.append((remove_non_alphanumeric(text).upper(), remove_non_alphanumeric(texts[i + 1]).upper()))
     return all_pairs
+
 
 def remove_non_alphanumeric(text):
     cleaned_text = re.sub(r'[^a-zA-Z0-9]', '', text)
