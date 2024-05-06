@@ -61,7 +61,7 @@ def handle_pauses(shapes, ided_tuples):
             neu_viseme = {
                 'word': 'DEF',
                 'start': first_shape['end'],
-                'end': first_shape['end']+30,
+                'end': first_shape['end']+60,
                 'graphemes': ['DEF'],
             }
             neu_viseme_2 = {

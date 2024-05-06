@@ -15,12 +15,12 @@ def generate_word_viseme_dict(word, duration, graphemes):
 
     word_vector_dicts = []
 
-    structure_phonemes = ["<s>", "</s>", "<sil>"]
+    structure_phonemes = ["<s>", "</s>", "<sil>", "DEF"]
 
     if word in structure_phonemes:
         structured_phoneme_vector = [0]*37
         structured_phoneme_vector[0] = 1
-        return [{"duration": duration, "targets": structured_phoneme_vector}]
+        return [{"duration": duration, "targets": structured_phoneme_vector, word: word}]
 
     split_graphemes = split_phonemes(graphemes)
 
