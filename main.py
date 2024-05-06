@@ -63,6 +63,8 @@ def main():
     print("Segments: ", segments)
     segments = process_handle_pause(segments, original_sentence)
 
+    print("Segments after processing pauses: ", segments)
+
     # segments = remove_mid_word_sils(segments)
 
     #make R => RR
