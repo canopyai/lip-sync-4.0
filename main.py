@@ -12,7 +12,7 @@ from get_duration import get_wav_duration
 from calculate_total_duration import calculate_total_duration
 from deduplicate_visemes import deduplicate_visemes
 from implementRR import implementRR
-from process_syllables.handle_pauses import handle_pauses
+from process_syllables.process_handle_pause import process_handle_pause
 
 from flask_cors import CORS
 import pandas as pd
@@ -37,6 +37,7 @@ def main():
     print("Request received") 
     data = request.get_json()
     sentence = data["text"]
+    original_sentence = sentence
     isFirstChunk = data["isFirstChunk"]
     emotion_vector = data["emotion_vector"]
     add_post_padding = data["add_post_padding"]
@@ -60,12 +61,12 @@ def main():
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
     print("Segments: ", segments)
-    segments = handle_pauses(segments)
+    segments = process_handle_pause(segments, original_sentence)
 
     # segments = remove_mid_word_sils(segments)
 
     #make R => RR
-    segments = implementRR(segments)
+    segments = implementRR(segments, )
 
     print("Segments after implementing RR: ", segments) 
     animation_sequence_packed = []
