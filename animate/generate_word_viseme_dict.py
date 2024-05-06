@@ -27,6 +27,7 @@ def generate_word_viseme_dict(word, duration, graphemes):
     merge_graphemes  = remove_useless_phonemes(merge_graphemes)
 
     
+    print("merge_graphemes for ",word, merge_graphemes)
 
 
     accumulate_weight_per_word = 0
