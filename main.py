@@ -7,7 +7,7 @@ from audio_utils.resample_audio import resample_audio
 from phonemize.get_segments_torch import get_segments
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_mid_word_sils import remove_mid_word_sils
-from emotions.generate_emotion_sequences import generate_emotion_sequences
+# from emotions.generate_emotion_sequences import generate_emotion_sequences
 from get_duration import get_wav_duration
 from calculate_total_duration import calculate_total_duration
 from deduplicate_visemes import deduplicate_visemes
@@ -40,7 +40,7 @@ def main():
     sentence = data["text"]
     original_sentence = sentence
     isFirstChunk = data["isFirstChunk"]
-    emotion_vector = data["emotion_vector"]
+    # emotion_vector = data["emotion_vector"]
     add_post_padding = data["add_post_padding"]
     preWav = time.time()
     b64string = get_wav_file(sentence, isFirstChunk)
@@ -107,7 +107,7 @@ def main():
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
     
-    gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
+    # gms = generate_emotion_sequences(emotion_vector, duration_step_1_summer/1000, 0)
 
     unpacked_animation_sequence = unpack_nested_list(animation_sequence_packed)
 
@@ -130,7 +130,7 @@ def main():
         "b64string": b64_22, 
         "segments_latency": segments_latency, 
         "tts_latency":postWav - preWav, 
-        "emotion_sequences":gms
+        # "emotion_sequences":gms
         }
 
 
