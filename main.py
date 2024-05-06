@@ -56,11 +56,11 @@ def main():
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
     print(segments)
-
+    segments = remove_mid_word_sils(segments)
 
     segments = implementRR(segments)
-    segments = process_handle_pause(segments, original_sentence)
-    segments = remove_mid_word_sils(segments)
+    # segments = process_handle_pause(segments, original_sentence)
+
 
     animation_sequence_packed = []
     duration_step_1_summer = 0
