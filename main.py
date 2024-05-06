@@ -55,6 +55,8 @@ def main():
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
+    print(segments)
+
 
     segments = implementRR(segments)
     segments = process_handle_pause(segments, original_sentence)
