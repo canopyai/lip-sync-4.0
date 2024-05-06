@@ -58,6 +58,8 @@ def main():
 
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
+    print("Segments: ", segments)
+
     # segments = remove_mid_word_sils(segments)
 
     #make R => RR
