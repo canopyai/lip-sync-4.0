@@ -60,7 +60,7 @@ def main():
     segments = remove_mid_word_sils(segments)
 
     segments = implementRR(segments)
-    segments = process_handle_pause(segments, original_sentence)
+    # segments = process_handle_pause(segments, original_sentence)
 
 
     animation_sequence_packed = []
