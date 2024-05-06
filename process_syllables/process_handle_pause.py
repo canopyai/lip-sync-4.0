@@ -73,7 +73,7 @@ def handle_pauses(shapes, ided_tuples):
             if duration_diff > 150:
                 # Create NEU viseme for the remaining duration
                 neu_viseme = {
-                    'word': 'NEU',
+                    'word': '<sil>',
                     'start': new_shape['end'],
                     'end': second_shape['start'],
                     'graphemes': ['<sil>'],
