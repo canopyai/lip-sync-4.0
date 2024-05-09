@@ -1,3 +1,7 @@
+import math
+import random
+
+
 def compute_head_movement_tuples(segments):
   head_movement_tuples = []
   first_segment_start = segments[0]['start']
