@@ -46,13 +46,13 @@ def main():
     resample_audio(raw_wav_file, resampled_wav_file, 16000)
     resample_audio(raw_wav_file, resampled_wav_file_22, 22050)
     duration = get_wav_duration(resampled_wav_file)
-    print("Duration: ", duration)
+    print("Duration: ", duration) 
 
     postWav = time.time()
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
-    calculate_head_movements(segments)
+    orchestrate_head_movement_curves(segments)
     segments = remove_mid_word_sils(segments)
 
     segments = implementRR(segments)
