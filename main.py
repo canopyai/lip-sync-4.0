@@ -13,7 +13,8 @@ from calculate_total_duration import calculate_total_duration
 from deduplicate_visemes import deduplicate_visemes
 from implementRR import implementRR
 from process_syllables.process_handle_pause import process_handle_pause
-from head_movements.calculate_head_movements import calculate_head_movements
+from head_movements.orchestrate_head_movement_curves import orchestrate_head_movement_curves
+
 
 from flask_cors import CORS
 import pandas as pd
@@ -22,11 +23,6 @@ import time
 import base64
 import re
 import os
-
-
-
-
-
 
 
 
