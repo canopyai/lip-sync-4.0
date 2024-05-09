@@ -11,3 +11,4 @@ def orchestrate_head_movement_curves(segments):
     alvs = add_durations(all_visemes)
     int_alvs = integrate_head_movements(alvs)
     its = add_eyebrow_movements(int_alvs, "happy")
+    return its
