@@ -52,7 +52,7 @@ def main():
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
-    orchestrate_head_movement_curves(segments)
+    head_movement_curves = orchestrate_head_movement_curves(segments)
     segments = remove_mid_word_sils(segments)
 
     segments = implementRR(segments)
@@ -125,7 +125,8 @@ def main():
         "visemes": unpacked_animation_sequence, 
         "b64string": b64_22, 
         "segments_latency": segments_latency, 
-        "tts_latency":postWav - preWav, 
+        "tts_latency":postWav - preWav,
+        "head_movement_curves": head_movement_curves
         # "emotion_sequences":gms
         }
 
