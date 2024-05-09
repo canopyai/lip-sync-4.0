@@ -119,7 +119,7 @@ def main():
     b64_22 = b64_encoded_data.decode('utf-8')
 
     tot = calculate_total_duration(unpacked_animation_sequence)
-    print("Total duration: ", tot)
+    print("head_movement_curves: ", head_movement_curves)
      
     return {
         "visemes": unpacked_animation_sequence, 
