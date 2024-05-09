@@ -1,3 +1,6 @@
+import random
+
+
 def convert_tuples_to_curves(tuples):
   visemes=[]
   polarisations = [random.choice([-1, 1]), random.choice([-1, 1]), random.choice([-1, 1])]
