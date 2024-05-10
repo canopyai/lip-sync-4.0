@@ -30,7 +30,5 @@ def add_eyebrow_movements(int_alvs, emotion):
         print("Not enough data to perform eyebrow movements, extending with zeros.")
         for alv in int_alvs:
             alv['targets'].extend([0, 0, 0, 0])
-    for _ in range(4):
-        alv['targets'].append(random.uniform(0, 1))
 
     return int_alvs
