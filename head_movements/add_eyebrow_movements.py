@@ -31,4 +31,5 @@ def add_eyebrow_movements(int_alvs, emotion):
         for alv in int_alvs:
             alv['targets'].extend([0, 0, 0, 0])
 
+
     return int_alvs
