@@ -3,6 +3,7 @@ from head_movements.convert_tuples_to_curves import convert_tuples_to_curves
 from head_movements.add_durations import add_durations
 from head_movements.integrate_head_movements import integrate_head_movements
 from head_movements.add_eyebrow_movements import add_eyebrow_movements
+# from head_movements.calculate_eye_stabilisations import calculate_eye_stabilisations
 
 
 def orchestrate_head_movement_curves(segments):
