@@ -8,7 +8,7 @@ def ease_in_out(t):
 def generate_half_sine_wave(steps):
 
     # Create an array of angles from pi to 2*pi
-    angles = np.linspace(np.pi, 2 * np.pi, steps)
+    angles = np.linspace(0,np.pi,steps)
     
     # Compute the sine of these angles
     sine_values = np.sin(angles)
@@ -36,7 +36,7 @@ def smoothen_curves(animations, step_duration=15):
     for i in range(len(new_animations)):
         new_animations[i]['targets'] = sine_steps[i] * new_animations[i]['targets']
     
-    
+
 
 
     return new_animations
