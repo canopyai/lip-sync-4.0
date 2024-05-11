@@ -4,11 +4,7 @@ def ease_in_out(t):
     """Cubic ease-in-ease-out function."""
     return 3 * t**2 - 2 * t**3
 
-def sine_half_wave(t):
-    """Sine half-wave function that decays to zero."""
-    return np.sin(np.pi * t)
-
-def smoothen_curves(animations, step_duration=15):
+def smoothen_curves(animations, step_duration=15, decay_steps=10):
     new_animations = []
     for i in range(len(animations) - 1):
         initial_targets = animations[i]['targets']
@@ -16,13 +12,17 @@ def smoothen_curves(animations, step_duration=15):
         total_duration = animations[i]['duration']
         steps = total_duration // step_duration
 
-        # Calculate the interpolated targets for each step, applying sine half-wave
+        # Calculate the interpolated targets for each step
         for step in range(steps + 1):
             t = step / steps
             eased_t = ease_in_out(t)
-            sine_wave_modulation = sine_half_wave(t)
-            interpolated_targets = [(initial + (final - initial) * eased_t) * sine_wave_modulation for initial, final in zip(initial_targets, final_targets)]
+            interpolated_targets = [initial + (final - initial) * eased_t for initial, final in zip(initial_targets, final_targets)]
+
+            # Apply decay to the last 10 elements of each sequence
+            if step >= steps - decay_steps + 1:
+                decay_factor = (steps - step) / decay_steps
+                interpolated_targets = [target * decay_factor for target in interpolated_targets]
+
             new_animations.append({'duration': step_duration, 'targets': interpolated_targets})
 
     return new_animations
-
