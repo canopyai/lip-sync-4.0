@@ -12,6 +12,6 @@ def orchestrate_head_movement_curves(segments):
     all_visemes = convert_tuples_to_curves(mov_tups)
     alvs = add_durations(all_visemes)
     int_alvs = integrate_head_movements(alvs)
-    int_alvs = smoothen_curves(int_alvs)
+    # int_alvs = smoothen_curves(int_alvs)
     int_alvs = add_eyebrow_movements(int_alvs, "happy")
     return int_alvs

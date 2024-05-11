@@ -12,6 +12,5 @@ def integrate_head_movements(alvs):
         current_position = [current_pos + delta for current_pos, delta in zip(current_position, deltas)]
         # Append the new position and duration to the list
         movement_info.append({'duration': duration, 'targets': current_position.copy()})
-    movement_info.append({'duration': 100, 'targets': [0, 0, 0, 0, 0, 0]})
     
     return movement_info
