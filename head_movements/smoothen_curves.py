@@ -31,7 +31,7 @@ def smoothen_curves(animations, step_duration=15):
             eased_t = ease_in_out(t)
             interpolated_targets = [initial + (final - initial) * eased_t for initial, final in zip(initial_targets, final_targets)]
             new_animations.append({'duration': step_duration, 'targets': interpolated_targets})
-    sine_steps = generate_half_sine_wave(steps)
+    sine_steps = generate_half_sine_wave(steps+1)
 
     for i in range(len(new_animations)):
         new_animations[i]['targets'] = [x * sine_steps[i] for x in new_animations[i]['targets']]
