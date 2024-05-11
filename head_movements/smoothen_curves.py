@@ -34,7 +34,7 @@ def smoothen_curves(animations, step_duration=15):
     sine_steps = generate_half_sine_wave(steps)
 
     for i in range(len(new_animations)):
-        new_animations[i]['targets'] = sine_steps[i] * new_animations[i]['targets']
+        new_animations[i]['targets'] = [x * sine_steps[i] for x in new_animations[i]['targets']]
     
 
 
