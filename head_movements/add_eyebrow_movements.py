@@ -3,11 +3,12 @@ from head_movements.get_eyebrow_selection_movement import get_eyebrow_selection_
 
 
 def add_eyebrow_movements(int_alvs, emotion):
-    if len(int_alvs) > 3:
+    eyebrow_activate_prob = 0.3
+    if (len(int_alvs) > 3) and random.random() < eyebrow_activate_prob:
         print(f'There are {len(int_alvs)} dicts')
         startIndex = random.randint(1, 2) if len(int_alvs) > 4 else 0
         endIndex = len(int_alvs) - 1 if random.choice([True, False]) else len(int_alvs) - 2
-        strength = random.uniform(0.5, 1)
+        strength = random.uniform(0.3, 0.7)
 
         # Iterate through the list and modify the targets based on the defined indices
         for index, alv in enumerate(int_alvs):
