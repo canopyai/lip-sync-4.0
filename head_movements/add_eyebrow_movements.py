@@ -3,7 +3,7 @@ from head_movements.get_eyebrow_selection_movement import get_eyebrow_selection_
 
 
 def add_eyebrow_movements(int_alvs, emotion):
-    eyebrow_activate_prob = 0.3
+    eyebrow_activate_prob = 0.7
     if (len(int_alvs) > 3) and random.random() < eyebrow_activate_prob:
         print(f'There are {len(int_alvs)} dicts')
         startIndex = random.randint(1, 2) if len(int_alvs) > 4 else 0
