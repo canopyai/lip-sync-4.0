@@ -7,7 +7,7 @@ from head_movements.smoothen_curves import smoothen_curves
 # from head_movements.calculate_eye_stabilisations import calculate_eye_stabilisations
 
 
-def orchestrate_head_movement_curves(segments):
+def orchestrate_head_movement_curves(segments, previousHeadMovementsStarting):
     mov_tups = compute_head_movement_tuples(segments)
     all_visemes = convert_tuples_to_curves(mov_tups)
     alvs = add_durations(all_visemes)

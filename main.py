@@ -29,6 +29,9 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+
+previousHeadMovementsStarting = [0, 0, 0, 0, 0, 0]
+
 @app.route('/generate_animation', methods=['POST'])
 def main():
     print("Request received") 
@@ -52,7 +55,7 @@ def main():
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
 
-    head_movement_curves = orchestrate_head_movement_curves(segments)
+    head_movement_curves = orchestrate_head_movement_curves(segments, previousHeadMovementsStarting)
     segments = remove_mid_word_sils(segments)
 
     segments = implementRR(segments)
