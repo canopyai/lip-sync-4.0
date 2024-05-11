@@ -90,7 +90,7 @@ def main():
 
         animation_sequence_packed.append(generated_word_viseme_dict)
     
-    # animation_sequence_packed.append(f_dict)
+    animation_sequence_packed.append(f_dict)
 
 
 
