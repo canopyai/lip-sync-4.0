@@ -30,7 +30,8 @@ app = Flask(__name__)
 CORS(app)
 
 
-previousHeadMovementsStarting = [0, 0, 0, 0, 0, 0]
+previousHeadMovementsStarting = {}
+previousHeadMovementsStarting.previousHeadMovementsStarting = [0, 0, 0, 0, 0, 0]
 
 @app.route('/generate_animation', methods=['POST'])
 def main():
