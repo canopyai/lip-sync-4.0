@@ -11,13 +11,14 @@ first_chunk_url  = 'http://34.91.134.10:8080/api/v1/static'
 def get_wav_file(text, isFirstChunk):
 
     data = {
-        'text': text,
-        'voice': "m-us-1", 
-        'steps': 13, 
+        'text': text, 
+        'voice': "m-us-1",
+        'steps': 20,
         'alpha': 0.3,
         'beta': 0.7,
-        'speed': 0.8, 
-        "embedding_scale":1, 
+        'speed': 1,
+        "embedding_scale":1,
+
         # "speed":0.8
 
     }
