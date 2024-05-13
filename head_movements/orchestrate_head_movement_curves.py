@@ -9,7 +9,7 @@ from head_movements.interpolate_with_easing import interpolate_with_cumulative_e
 def orchestrate_head_movement_curves(segments):
     mov_tups = compute_head_movement_tuples(segments)
     all_visemes = convert_tuples_to_curves(mov_tups)
-    alvs = interpolate_with_cumulative_easing(all_visemes) 
+    # alvs = interpolate_with_cumulative_easing(all_visemes) 
     alvs = add_durations(all_visemes)
     int_alvs = integrate_head_movements(alvs)
     # int_alvs = add_eyebrow_movements(int_alvs, "happy")
