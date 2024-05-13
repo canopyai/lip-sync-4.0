@@ -14,5 +14,6 @@ def orchestrate_head_movement_curves(segments):
     alvs = interpolate_with_cumulative_easing(all_visemes) 
     alvs_copy = add_durations(all_visemes_copy)
     int_alvs = integrate_head_movements(alvs)
-    int_alvs_brows = add_eyebrow_movements(alvs_copy, "happy")
+    int_alvs_copy = int_alvs.copy()
+    int_alvs_brows = add_eyebrow_movements(int_alvs_copy, "happy")
     return int_alvs, int_alvs_brows

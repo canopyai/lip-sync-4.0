@@ -9,7 +9,7 @@ def add_eyebrow_movements(int_alvs, emotion):
         startIndex = random.randint(1, 2) if len(int_alvs) > 4 else 0
         endIndex = len(int_alvs) - 1 if random.choice([True, False]) else len(int_alvs) - 2
         strength = random.uniform(0.3, 0.7)
-
+        alv["targets"]=[]
         # Iterate through the list and modify the targets based on the defined indices
         for index, alv in enumerate(int_alvs):
             if index < startIndex:
