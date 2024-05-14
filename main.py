@@ -41,8 +41,9 @@ def main():
     # emotion_vector = data["emotion_vector"]
     add_post_padding = data["add_post_padding"]
     voice_vector = data["voice_vector"]
+    speed = data["speed"]
     preWav = time.time()
-    b64string = get_wav_file(sentence, isFirstChunk, voice_vector)
+    b64string = get_wav_file(sentence, isFirstChunk, voice_vector, speed)
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
     resampled_wav_file_22 = "audio_utils/22050_res.wav"
