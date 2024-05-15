@@ -5,7 +5,7 @@ import base64
 import time
 
 api_url = 'http://34.34.9.101:8080/api/v1/static'
-first_chunk_url  = 'http://34.91.134.10:8080/api/v1/static'
+first_chunk_url  = 'http://34.147.74.133:8080/api/v1/static'
 
 
 def get_wav_file(text, isFirstChunk, voice_vector=[0, 0, 1], speed=0.9):
