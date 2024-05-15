@@ -11,8 +11,6 @@ from animate.remove_tiny_durations import remove_tiny_durations
 
 def generate_word_viseme_dict(word, duration, graphemes, previous_targets=None):
 
-    print("Generating word viseme dict for word: ", word, " with duration: ", duration, " and graphemes: ", graphemes)
-
     word_vector_dicts = []
 
     structure_phonemes = ["<s>", "</s>", "<sil>"]
@@ -30,10 +28,6 @@ def generate_word_viseme_dict(word, duration, graphemes, previous_targets=None):
     merge_graphemes = merge_phonemes_according_to_rules(split_graphemes)
 
     merge_graphemes  = remove_useless_phonemes(merge_graphemes)
-
-    
-
-
 
     accumulate_weight_per_word = 0
     for grapheme in merge_graphemes:

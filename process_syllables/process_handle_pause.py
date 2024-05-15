@@ -82,7 +82,6 @@ def handle_pauses(shapes, ided_tuples):
 
 
 def process_handle_pause(segments, sentence):
-    print("processing handle pause", segments)
     word_tuples = find_pair_punctuation(sentence)
     boundaries = find_boundaries(word_tuples, segments)
     handled_pauses = handle_pauses(segments, boundaries)

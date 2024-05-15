@@ -3,7 +3,6 @@ def deduplicate_visemes(data):
 
     # Check for equality between elements 0 through 32 inclusive
     for i in range(len(data) - 1):
-        print(data[i], data[i + 1])
         if (data[i]['targets'][:33] == data[i + 1]['targets'][:33]) and ('base' not in data[i + 1] or data[i + 1]["base"] != "DUP"):
             indices_to_modify.append(i)
 

@@ -27,10 +27,8 @@ def add_eyebrow_movements(int_alvs, emotion):
 
 
 
-        print(f'Start index: {startIndex}, End index: {endIndex}, Strength: {strength}')
     else:
         # If the list is not long enough, extend all with zeros
-        print("Not enough data to perform eyebrow movements, extending with zeros.")
         for alv in int_alvs:
             alv['targets'].extend([0, 0, 0, 0])
 
