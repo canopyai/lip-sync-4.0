@@ -31,6 +31,7 @@ def get_segments(speech_file, text):
     ratio = waveform[0].size(0) / bundle.sample_rate / trellis.size(0)
     words = process_words(words, ratio)
     segments_time = time.time() - startTime
+
     return words, segments_time
 
 
