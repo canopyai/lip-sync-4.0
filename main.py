@@ -54,7 +54,7 @@ def main():
     postWav = time.time()
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
-    print(f'Segments generated: {time.time() - postWav:.2f}s'
+    print(f'Segments generated: {time.time() - postWav:.2f}s')
 
     head_movement_curves, int_alvs_brows = orchestrate_head_movement_curves(segments)
     segments = remove_mid_word_sils(segments)
