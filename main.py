@@ -43,6 +43,7 @@ def main():
     speed = data["speed"]
     preWav = time.time()
     b64string = get_wav_file(sentence, isFirstChunk, voice_vector, speed)
+    print(f'Wav file generated: {time.time() - preWav:.2f}s')
     raw_wav_file = "audio_utils/speech.wav"
     resampled_wav_file = "audio_utils/resampled.wav"
     resampled_wav_file_22 = "audio_utils/22050_res.wav"
