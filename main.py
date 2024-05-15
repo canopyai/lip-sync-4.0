@@ -33,7 +33,8 @@ CORS(app)
 
 @app.route('/generate_animation', methods=['POST'])
 def main():
-    print("Request received") 
+    print("Request received")
+    start_time = time.time() 
     data = request.get_json()
     sentence = data["text"]
     isFirstChunk = data["isFirstChunk"]
@@ -48,7 +49,6 @@ def main():
     resample_audio(raw_wav_file, resampled_wav_file, 16000)
     resample_audio(raw_wav_file, resampled_wav_file_22, 22050)
     duration = get_wav_duration(resampled_wav_file)
-    print("Duration: ", duration) 
 
     postWav = time.time()
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
@@ -122,6 +122,9 @@ def main():
 
     tot = calculate_total_duration(unpacked_animation_sequence)
 
+    end_time = time.time()
+
+    print(f'Duration: {end_time - start_time:.2f}s')
      
     return {
         "visemes": unpacked_animation_sequence, 
