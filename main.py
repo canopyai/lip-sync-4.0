@@ -36,9 +36,7 @@ def main():
     print("Request received") 
     data = request.get_json()
     sentence = data["text"]
-    original_sentence = sentence
     isFirstChunk = data["isFirstChunk"]
-    # emotion_vector = data["emotion_vector"]
     add_post_padding = data["add_post_padding"]
     voice_vector = data["voice_vector"]
     speed = data["speed"]
