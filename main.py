@@ -52,6 +52,7 @@ def main():
     duration = get_wav_duration(resampled_wav_file)
 
     postWav = time.time()
+    original_sentence = sentence
     sentence = re.sub(r'[^A-Z\s]', '', sentence.upper())
     segments, segments_latency = get_segments(resampled_wav_file, sentence)
     print(f'Segments generated: {time.time() - postWav:.2f}s')
