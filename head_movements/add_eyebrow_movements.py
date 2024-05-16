@@ -3,6 +3,7 @@ from head_movements.get_eyebrow_selection_movement import get_eyebrow_selection_
 
 
 def add_eyebrow_movements(int_alvs, emotion):
+    print("adding eyebrow movements")
     eyebrow_activate_prob = 0.7
     if (len(int_alvs) > 3) and random.random() < eyebrow_activate_prob:
         print(f'There are {len(int_alvs)} dicts')
@@ -24,6 +25,7 @@ def add_eyebrow_movements(int_alvs, emotion):
 
 
     else:
+        print("the list is not long enough")
         # If the list is not long enough, extend all with zeros
         for alv in int_alvs:
             alv["targets"]=[]
