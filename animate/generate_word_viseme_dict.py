@@ -5,8 +5,6 @@ from process_syllables.generate_phoneme_dict_seq import generate_phoneme_dict_se
 from animate.generate_animation_per_syllable import generate_animation_per_syllable
 from utils.unpack_nested_list import unpack_nested_list
 from animate.remove_useless_phonemes import remove_useless_phonemes
-
-
 from animate.remove_tiny_durations import remove_tiny_durations
 
 def generate_word_viseme_dict(word, duration, graphemes, previous_targets=None):
@@ -51,10 +49,6 @@ def generate_word_viseme_dict(word, duration, graphemes, previous_targets=None):
     #prune syllables
     # print("pruning",word_vector_dicts)
     word_vector_dicts = remove_tiny_durations(word_vector_dicts)
-
-
-    
-
     unpacked_word_vector_dicts = unpack_nested_list(word_vector_dicts)
     
     return unpacked_word_vector_dicts
