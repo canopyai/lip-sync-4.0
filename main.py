@@ -102,11 +102,12 @@ def main():
     if add_post_padding:
         g_structured_phoneme_vector = [0]*37
         g_structured_phoneme_vector[0] = 1
-        g_dict =  [{"duration": 100, "targets": g_structured_phoneme_vector}]
+        g_dict =  [{"duration": 100, "targets": g_structured_phoneme_vector, "base":"DUP"}]
         animation_sequence_packed.append(g_dict)
         animation_sequence_packed.append({
             "duration": 1000,
-            "targets": g_structured_phoneme_vector
+            "targets": g_structured_phoneme_vector, 
+            "base":"DUP"
         
         })
 
