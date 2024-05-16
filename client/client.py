@@ -44,7 +44,7 @@ def generate_animation(TTSSentence, isFirstChunk, voiceVector, speed, conversati
 
 # Example usage
 generate_animation(
-    TTSSentence="Your TTS sentence here",
+    TTSSentence="I wonder how long this will take today.",
     isFirstChunk=True,
     voiceVector=[0, 0, 1],
     speed=1.0,
