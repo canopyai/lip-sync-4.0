@@ -14,8 +14,8 @@ def convert_tuples_to_curves(tuples):
 
     # Generate one random number between 0.75 and 1
     weights.append(random.uniform(0.75, 1))
-    weights.shuffle()
-
+    random.shuffle(weights)
+    
     polarisations = [_*-1 for _ in polarisations]
     magnitude = random.uniform(0.2, 0.7)
 
