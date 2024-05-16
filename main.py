@@ -95,14 +95,14 @@ def main():
 
         animation_sequence_packed.append(generated_word_viseme_dict)
     
-    animation_sequence_packed.append(f_dict)
+    # animation_sequence_packed.append(f_dict)
 
 
 
     if add_post_padding:
         g_structured_phoneme_vector = [0]*37
         g_structured_phoneme_vector[0] = 1
-        g_dict =  [{"duration": 300, "targets": g_structured_phoneme_vector}]
+        g_dict =  [{"duration": 600, "targets": g_structured_phoneme_vector}]
         animation_sequence_packed.append(g_dict)
 
 
