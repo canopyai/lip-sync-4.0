@@ -1,6 +1,6 @@
 def integrate_head_movements(alvs):
     # Starting position
-    current_position = [0, 0, 0, 0]
+    current_position = [0, 0, 0, 0, 0, 0]
     # List to store the movement information with positions
     movement_info = []
 
