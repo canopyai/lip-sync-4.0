@@ -16,7 +16,8 @@ def orchestrate_head_movement_curves(segments):
     int_alvs = integrate_head_movements(alvs)
 
     alvs_copy = add_durations(all_visemes_copy)
+    print("alvs_copy durations", alvs_copy)
     int_alvs_copy = integrate_head_movements(alvs_copy)
     int_alvs_copy = add_eyebrow_movements(int_alvs_copy, "happy")
-    print("int_alvs_copy", int_alvs_copy)
+    # print("int_alvs_copy", int_alvs_copy)
     return int_alvs, int_alvs_copy

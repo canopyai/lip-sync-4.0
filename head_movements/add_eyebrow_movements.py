@@ -17,7 +17,7 @@ def add_eyebrow_movements(int_alvs, emotion):
                 alv['targets'].extend([0, 0, 0, 0])
             elif startIndex <= index <= endIndex:
                 adjustments = get_eyebrow_selection_movement(emotion)
-                alv['targets'].extend([0, 0, 0, 0])
+
             else:
                 alv['targets'].extend([0, 0, 0, 0])
 
