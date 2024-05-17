@@ -1,4 +1,8 @@
-def add_smoothing_points(data, num_extra_points=2, sigma=1):
+import numpy as np
+from scipy.interpolate import interp1d
+from scipy.ndimage import gaussian_filter1d
+
+def interpolate_with_cumulative_easing(data, num_extra_points=2, sigma=1):
     """
     Adds extra points around each original point for smoothing.
 
