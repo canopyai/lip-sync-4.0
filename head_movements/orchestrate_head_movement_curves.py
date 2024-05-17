@@ -20,8 +20,9 @@ def orchestrate_head_movement_curves(segments):
     # print("interpolate_with_cumulative_easing", len(alvs))
     
     int_alvs = integrate_head_movements(alvs)
+
+    int_alvs = interpolate_with_cumulative_easing(int_alvs) 
     print("int_alvs", int_alvs)
-    # int_alvs = interpolate_with_cumulative_easing(int_alvs) 
     # print("integrate_head_movements", len(int_alvs))
 
    
