@@ -3,7 +3,6 @@ from head_movements.get_eyebrow_selection_movement import get_eyebrow_selection_
 
 
 def add_eyebrow_movements(int_alvs, emotion):
-    print("adding eyebrow movements")
     eyebrow_activate_prob = 0.7
     if (len(int_alvs) > 3) and random.random() < eyebrow_activate_prob:
         print(f'There are {len(int_alvs)} dicts')
@@ -18,7 +17,6 @@ def add_eyebrow_movements(int_alvs, emotion):
                 alv['targets'].extend([0, 0, 0, 0])
             elif startIndex <= index <= endIndex:
                 adjustments = get_eyebrow_selection_movement(emotion)
-                print(f'Adjustments: {adjustments}')
                 for i in range(4):
                     alv['targets'].append(adjustments[i] * strength)
 
