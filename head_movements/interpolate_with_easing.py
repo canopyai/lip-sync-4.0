@@ -1,49 +1,27 @@
 import numpy as np
+from scipy.interpolate import interp1d
 
-def cubic_ease_in_out(t):
-    """
-    Cubic ease-in-out function for smooth transitions.
+def interpolate_with_cumulative_easing(data, interval=15):
+    cumulative_durations = [sum(entry['duration'] for entry in data[:i+1]) for i in range(len(data))]
     
-    :param t: Normalized time value (0 <= t <= 1).
-    :return: Eased time value.
-    """
-    if t < 0.5:
-        return 4 * t ** 3
-    else:
-        return 1 - 4 * (1 - t) ** 3
-
-def interpolate_with_cumulative_easing(data, interval_ms=15):
-    """
-    Interpolates movement data with cumulative cubic ease-in-out easing.
+    # Number of deltas
+    num_deltas = len(data[0]['deltas'])
     
-    :param data: List of dicts, each with 'duration' and 'deltas' for movement transitions.
-    :param interval_ms: Time interval in milliseconds for each interpolation step.
-    :return: List of dicts with eased deltas and corresponding timestamps.
-    """
-    result = []
-    current_values = [0] * 6  # Start values for 6 targets
-    current_time = 0
+    # Prepare new list
+    new_data = []
     
-    for index, item in enumerate(data):
-        duration = item['duration']
-        deltas = item['deltas']
+    # Generate interpolated points for each delta index
+    for i in range(num_deltas):
+        x = cumulative_durations
+        y = [entry['deltas'][i] for entry in data]
+        f = interp1d(x, y, kind='cubic')
+        x_new = np.arange(x[0], x[-1], interval)
+        y_new = f(x_new)
         
-        num_frames = int(duration / interval_ms)
-        
-        for i in range(num_frames + 1):
-            t = i / num_frames
-            eased_t = cubic_ease_in_out(t)
-            
-            # Calculate eased deltas
-            interpolated_deltas = [current_values[j] + deltas[j] * eased_t for j in range(6)]
-            result.append({
-                'deltas': interpolated_deltas,
-                'duration': 15
-            })
-        
-        # Update current_values to the end values of this segment
-        current_values = [current_values[j] + deltas[j] for j in range(6)]
-        current_time += duration
+        # Create new entries for each interpolated point
+        for j in range(len(x_new)):
+            if j >= len(new_data):
+                new_data.append({'duration': interval, 'deltas': [0] * num_deltas})
+            new_data[j]['deltas'][i] = y_new[j]
     
-    return result
-
+    return new_data
