@@ -1,41 +1,45 @@
-import numpy as np
+def add_smoothing_points(data, num_extra_points=2, sigma=1):
+    """
+    Adds extra points around each original point for smoothing.
 
+    Args:
+        data (list of dicts): Original data.
+        num_extra_points (int): Number of extra points to add around each original point.
+        sigma (float): Standard deviation for Gaussian kernel.
 
-def cubic_ease_in_out(t):
-    if t < 0.5:
-        return 4 * t ** 3
-    else:
-        return 1 - 4 * (1 - t) ** 3
+    Returns:
+        list of dicts: Data with smoothed target values.
+    """
+    cumulative_durations = np.cumsum([item['duration'] for item in data])
+    targets = [item['targets'] for item in data]
 
-def interpolate_with_cumulative_easing(data, interval_ms=15):
-    result = []
-    current_values = [0] * 6  # Start values for 6 targets
-    
-    for index, item in enumerate(data):
-        start_index = item['start']
-        deltas = item['deltas']
-        
-        # Calculate the duration to the next transition or a default value
-        if index < len(data) - 1:
-            duration = data[index + 1]['start'] - start_index
-        else:
-            duration = 1000  # Default duration of 1000ms for the last segment
-        
-        num_frames = int(duration / interval_ms)
-        for i in range(num_frames + 1):
-            t = i / num_frames
-            eased_t = cubic_ease_in_out(t)
-            
-            # Calculate eased deltas
-            interpolated_deltas = [current_values[j] + deltas[j] * eased_t for j in range(6)]
-            result.append({
-                'deltas': interpolated_deltas,
-                'start': start_index + i * interval_ms
-            })
-        
-        # Update current_values to the last values of this segment
-        current_values = [current_values[j] + deltas[j] for j in range(6)]
-    
-    return result
+    smoothed_data = []
 
-# We can re-run this function on your data and plot the results.
+    # Function to generate extra points around each original point
+    def generate_extra_points(x, y, num_extra_points):
+        new_x = []
+        new_y = []
+        for i in range(len(x) - 1):
+            x_interp = np.linspace(x[i], x[i + 1], num=num_extra_points + 2)
+            y_interp = interp1d(x, y, kind='linear')(x_interp)
+            new_x.extend(x_interp[:-1])
+            new_y.extend(y_interp[:-1])
+        new_x.append(x[-1])
+        new_y.append(y[-1])
+        return new_x, new_y
+
+    for i in range(len(targets[0])):
+        target_values = [target[i] for target in targets]
+        extra_x, extra_y = generate_extra_points(cumulative_durations, target_values, num_extra_points)
+        smoothed_values = gaussian_filter1d(extra_y, sigma=sigma)
+
+        # Update smoothed values back into data
+        for j, item in enumerate(smoothed_data):
+            item['targets'][i] = smoothed_values[j]
+
+    # Recalculate durations from cumulative durations
+    new_cumulative_durations = [extra_x[0]] + list(np.diff(extra_x))
+    for j in range(len(smoothed_data)):
+        smoothed_data[j]['duration'] = new_cumulative_durations[j]
+
+    return smoothed_data
