@@ -1,34 +1,41 @@
 import numpy as np
-from scipy.interpolate import interp1d
 
-def interpolate_with_cumulative_easing(data, interval=15):
-    # Calculate cumulative durations excluding the first segment
-    cumulative_durations = [0] + [sum(entry['duration'] for entry in data[:i+1]) for i in range(1, len(data))]
+
+def cubic_ease_in_out(t):
+    if t < 0.5:
+        return 4 * t ** 3
+    else:
+        return 1 - 4 * (1 - t) ** 3
+
+def interpolate_with_cumulative_easing(data, interval_ms=15):
+    result = []
+    current_values = [0] * 6  # Start values for 6 targets
     
-    # Number of deltas
-    num_deltas = len(data[0]['targets'])
-    
-    # Prepare new list
-    new_data = [{'duration': data[0]['duration'], 'targets': data[0]['targets']}]
-    
-    # Generate interpolated points for each delta index
-    for i in range(num_deltas):
-        x = cumulative_durations[1:]
-        y = [entry['targets'][i] for entry in data][1:]
+    for index, item in enumerate(data):
+        start_index = item['start']
+        deltas = item['deltas']
         
-        # Check if there are enough points for cubic interpolation
-        if len(x) < 4:
-            # Not enough points for cubic interpolation, return input data
-            return data
+        # Calculate the duration to the next transition or a default value
+        if index < len(data) - 1:
+            duration = data[index + 1]['start'] - start_index
+        else:
+            duration = 1000  # Default duration of 1000ms for the last segment
         
-        f = interp1d(x, y, kind='cubic')
-        x_new = np.arange(x[0], x[-1], interval)
-        y_new = f(x_new)
+        num_frames = int(duration / interval_ms)
+        for i in range(num_frames + 1):
+            t = i / num_frames
+            eased_t = cubic_ease_in_out(t)
+            
+            # Calculate eased deltas
+            interpolated_deltas = [current_values[j] + deltas[j] * eased_t for j in range(6)]
+            result.append({
+                'deltas': interpolated_deltas,
+                'start': start_index + i * interval_ms
+            })
         
-        # Create new entries for each interpolated point
-        for j in range(len(x_new)):
-            if j >= len(new_data) - 1:
-                new_data.append({'duration': interval, 'targets': [0] * num_deltas})
-            new_data[j + 1]['targets'][i] = y_new[j]
+        # Update current_values to the last values of this segment
+        current_values = [current_values[j] + deltas[j] for j in range(6)]
     
-    return new_data
+    return result
+
+# We can re-run this function on your data and plot the results.
