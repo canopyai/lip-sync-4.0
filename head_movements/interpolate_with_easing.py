@@ -16,26 +16,21 @@ def interpolate_with_cumulative_easing(data, interval_ms=15):
     """
     Interpolates movement data with cumulative cubic ease-in-out easing.
     
-    :param data: List of dicts, each with 'start' and 'deltas' for movement transitions.
+    :param data: List of dicts, each with 'duration' and 'deltas' for movement transitions.
     :param interval_ms: Time interval in milliseconds for each interpolation step.
     :return: List of dicts with eased deltas and corresponding timestamps.
     """
     result = []
     current_values = [0] * 6  # Start values for 6 targets
+    current_time = 0
     
     for index, item in enumerate(data):
-        start_index = item['start']
+        duration = item['duration']
         deltas = item['deltas']
-        
-        # Calculate the duration to the next transition or a default value
-        if index < len(data) - 1:
-            duration = data[index + 1]['start'] - start_index
-        else:
-            duration = 1000  # Default duration of 1000ms for the last segment
         
         num_frames = int(duration / interval_ms)
         
-        for i in range(num_frames):
+        for i in range(num_frames + 1):
             t = i / num_frames
             eased_t = cubic_ease_in_out(t)
             
@@ -43,10 +38,12 @@ def interpolate_with_cumulative_easing(data, interval_ms=15):
             interpolated_deltas = [current_values[j] + deltas[j] * eased_t for j in range(6)]
             result.append({
                 'deltas': interpolated_deltas,
-                'start': start_index + i * interval_ms
+                'start': current_time + i * interval_ms
             })
         
-        # Update current_values to the target values for the next segment
+        # Update current_values to the end values of this segment
         current_values = [current_values[j] + deltas[j] for j in range(6)]
+        current_time += duration
     
     return result
+
