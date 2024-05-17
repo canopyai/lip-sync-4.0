@@ -14,6 +14,7 @@ def get_wav_file(text, isFirstChunk, voice_vector=[1, 0, 0], speed=0.9):
     if(voice_vector[2] == 1):
         rev_alpha = 0
         rev_beta = 0
+        print("Voice vector is 2")
     
     data = {
         'text': text, 
