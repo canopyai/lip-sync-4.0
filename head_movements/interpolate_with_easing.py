@@ -38,7 +38,7 @@ def interpolate_with_cumulative_easing(data, interval_ms=15):
             interpolated_deltas = [current_values[j] + deltas[j] * eased_t for j in range(6)]
             result.append({
                 'deltas': interpolated_deltas,
-                'start': current_time + i * interval_ms
+                'duration': 15
             })
         
         # Update current_values to the end values of this segment
