@@ -14,7 +14,7 @@ def orchestrate_head_movement_curves(segments):
     alvs = all_visemes
     
     alvs = add_durations(alvs)
-    print("add_durations", len(alvs))
+    print("add_durations", alvs)
     
     alvs = interpolate_with_cumulative_easing(alvs) 
     print("interpolate_with_cumulative_easing", len(alvs))
