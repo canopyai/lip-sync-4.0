@@ -15,6 +15,12 @@ def interpolate_with_cumulative_easing(data, interval=15):
     for i in range(num_deltas):
         x = cumulative_durations[1:]
         y = [entry['targets'][i] for entry in data][1:]
+        
+        # Check if there are enough points for cubic interpolation
+        if len(x) < 4:
+            # Not enough points for cubic interpolation, return input data
+            return data
+        
         f = interp1d(x, y, kind='cubic')
         x_new = np.arange(x[0], x[-1], interval)
         y_new = f(x_new)
