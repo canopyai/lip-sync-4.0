@@ -1,7 +1,3 @@
-import numpy as np
-from scipy.interpolate import interp1d
-from scipy.ndimage import gaussian_filter1d
-
 def add_smoothing_points(data, num_extra_points=2, sigma=1):
     """
     Adds extra points around each original point for smoothing.
@@ -14,12 +10,12 @@ def add_smoothing_points(data, num_extra_points=2, sigma=1):
     Returns:
         list of dicts: Data with smoothed target values.
     """
-    durations = [item['duration'] for item in data]
-    cumulative_durations = np.cumsum(durations)
+    cumulative_durations = np.cumsum([item['duration'] for item in data])
     targets = [item['targets'] for item in data]
 
-    new_data = []
+    smoothed_data = []
 
+    # Function to generate extra points around each original point
     def generate_extra_points(x, y, num_extra_points):
         new_x = []
         new_y = []
@@ -32,24 +28,18 @@ def add_smoothing_points(data, num_extra_points=2, sigma=1):
         new_y.append(y[-1])
         return new_x, new_y
 
-    # Generating extra points for each target
     for i in range(len(targets[0])):
         target_values = [target[i] for target in targets]
         extra_x, extra_y = generate_extra_points(cumulative_durations, target_values, num_extra_points)
         smoothed_values = gaussian_filter1d(extra_y, sigma=sigma)
-        
-        if i == 0:
-            # Initialize the new data structure
-            for j in range(len(smoothed_values)):
-                new_data.append({'duration': 0, 'targets': [0] * len(targets[0])})
-        
-        # Update targets with smoothed values
-        for j in range(len(smoothed_values)):
-            new_data[j]['targets'][i] = smoothed_values[j]
 
-    # Calculate new durations
-    for j in range(1, len(new_data)):
-        new_data[j]['duration'] = extra_x[j] - extra_x[j - 1]
+        # Update smoothed values back into data
+        for j, item in enumerate(smoothed_data):
+            item['targets'][i] = smoothed_values[j]
 
-    return new_data
+    # Recalculate durations from cumulative durations
+    new_cumulative_durations = [extra_x[0]] + list(np.diff(extra_x))
+    for j in range(len(smoothed_data)):
+        smoothed_data[j]['duration'] = new_cumulative_durations[j]
 
+    return smoothed_data

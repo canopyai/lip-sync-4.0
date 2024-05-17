@@ -17,7 +17,7 @@ def convert_tuples_to_curves(tuples):
     random.shuffle(weights)
     
     polarisations = [_*-1 for _ in polarisations]
-    magnitude = random.uniform(0.2, 0.7)
+    magnitude = random.uniform(0.2, 0.4)
 
     weights = [x * magnitude * polarisations[i] for i, x in enumerate(weights)]
 
