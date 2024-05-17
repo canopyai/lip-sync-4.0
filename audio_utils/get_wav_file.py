@@ -8,14 +8,19 @@ api_url = 'http://34.34.9.101:8080/api/v1/static'
 first_chunk_url  = 'http://34.147.74.133:8080/api/v1/static'
 
 
-def get_wav_file(text, isFirstChunk, voice_vector=[0, 0, 1], speed=0.9):
-
+def get_wav_file(text, isFirstChunk, voice_vector=[1, 0, 0], speed=0.9):
+    rev_alpha = 0.3
+    rev_beta = 0.7
+    if(voice_vector[2] == 1):
+        rev_alpha = 0
+        rev_beta = 0
+    
     data = {
         'text': text, 
         'voice': voice_vector,
         'steps': 20,
-        'alpha': 0.3,
-        'beta': 0.7,
+        'alpha': rev_alpha,
+        'beta': rev_beta,
         'speed': speed,
         "embedding_scale":1,
 
