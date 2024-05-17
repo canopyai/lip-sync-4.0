@@ -10,7 +10,7 @@ from head_movements.add_eyebrow_movements import add_eyebrow_movements
 def orchestrate_head_movement_curves(segments):
     mov_tups = compute_head_movement_tuples(segments)
     all_visemes = convert_tuples_to_curves(mov_tups)
-    all_visemes_copy = all_visemes.copy()
+    alvs = all_visemes.copy()
     # alvs = interpolate_with_cumulative_easing(all_visemes) 
     # print("interpolate_with_cumulative_easing", len(alvs))
     alvs = add_durations(alvs)
