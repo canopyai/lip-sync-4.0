@@ -74,7 +74,7 @@ def main():
         f_dur = last_end_time
         f_structured_phoneme_vector = [0]*37
         f_structured_phoneme_vector[0] = 1
-        f_dict =  [{"duration":100, "targets": f_structured_phoneme_vector}]
+        f_dict =  [{"duration": f_dur, "targets": f_structured_phoneme_vector}]
 
     previous_targets = None
     for segment in segments:
