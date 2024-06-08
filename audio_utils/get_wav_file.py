@@ -4,8 +4,8 @@ from audio_utils.resample_audio import resample_audio
 import base64
 import time
 
-api_url = 'http://34.34.9.101:8080/api/v1/static'
-first_chunk_url  = 'http://34.147.74.133:8080/api/v1/static'
+api_url = 'http://34.32.129.161:8080/api/v1/static'
+first_chunk_url  = 'http://34.34.2.18:8080/api/v1/static'
 
 
 def get_wav_file(text, isFirstChunk, voice_vector=[1, 0, 0], speed=0.9):
